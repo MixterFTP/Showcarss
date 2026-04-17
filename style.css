@@ -1,0 +1,1158 @@
+/* =============================================
+   SHOWCARS — GLOBAL STYLES
+   ============================================= */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --rojo: #E8001D;
+    --rojo-oscuro: #a0001a;
+    --negro: #080808;
+    --gris-oscuro: #111111;
+    --gris-medio: #1e1e1e;
+    --gris: #333;
+    --gris-claro: #888;
+    --blanco: #f4f4f0;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-ui: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--negro);
+    color: var(--blanco);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+/* =============================================
+   VIDEO FONDO
+   ============================================= */
+
+#videoFondo {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(8,8,8,0.85) 0%, rgba(8,8,8,0.6) 100%);
+    z-index: -2;
+}
+
+.noise {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+}
+
+/* =============================================
+   CONTROLES DE AUDIO
+   ============================================= */
+
+.control-volumen {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    background: rgba(10,10,10,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 10px 16px;
+    border-radius: 4px;
+    color: var(--gris-claro);
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+}
+
+.control-volumen input[type="range"] {
+    width: 100px;
+    accent-color: var(--rojo);
+    cursor: pointer;
+}
+
+#musica {
+    position: fixed;
+    bottom: 24px; left: 24px;
+    background: rgba(10,10,10,0.85);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: var(--blanco);
+    padding: 10px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+#musica:hover {
+    border-color: var(--rojo);
+    background: rgba(232,0,29,0.15);
+}
+
+/* =============================================
+   NAVEGACIÓN
+   ============================================= */
+
+.menu {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 48px;
+    height: 70px;
+    background: rgba(8,8,8,0.9);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+}
+
+.logo {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 4px;
+    color: var(--blanco);
+    text-decoration: none;
+}
+
+.logo span {
+    color: var(--rojo);
+}
+
+.links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.links a {
+    color: rgba(244,244,240,0.7);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+
+.links a:hover {
+    color: var(--blanco);
+}
+
+.btn-nav {
+    background: var(--rojo) !important;
+    color: white !important;
+    padding: 8px 18px !important;
+    border-radius: 2px;
+    letter-spacing: 2px;
+}
+
+.btn-nav:hover {
+    background: var(--rojo-oscuro) !important;
+}
+
+.hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--blanco);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 70px; left: 0; right: 0;
+    background: rgba(8,8,8,0.97);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    flex-direction: column;
+    padding: 20px 48px;
+    gap: 16px;
+    z-index: 99;
+}
+
+.mobile-menu.open {
+    display: flex;
+}
+
+.mobile-menu a {
+    color: rgba(244,244,240,0.8);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+
+.hero {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;       
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+}
+
+.hero-content {
+    max-width: 700px;
+}
+
+.hero-eyebrow {
+    font-family: var(--font-ui);
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--rojo);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(72px, 12vw, 160px);
+    line-height: 0.9;
+    margin-bottom: 24px;
+}
+
+.outline-text {
+    -webkit-text-stroke: 2px var(--blanco);
+    color: transparent;
+}
+
+.hero-sub {
+    font-family: var(--font-ui);
+    font-size: 15px;
+    letter-spacing: 3px;
+    color: rgba(244,244,240,0.6);
+    margin-bottom: 36px;
+    text-transform: uppercase;
+}
+
+.hero-btn {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blanco);
+    text-decoration: none;
+    border: 1px solid var(--rojo);
+    padding: 16px 36px;
+    transition: background 0.25s, color 0.25s;
+}
+
+.hero-btn:hover {
+    background: var(--rojo);
+}
+
+.hero-scroll {
+    position: absolute;
+    bottom: 40px; right: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-scroll span {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: rgba(244,244,240,0.3);
+    writing-mode: vertical-rl;
+    text-transform: uppercase;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--rojo), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+/* =============================================
+   SECCIÓN MARCAS
+   ============================================= */
+
+.marcas-section {
+    padding: 120px 48px;
+    background: rgba(8,8,8,0.7);
+    position: relative;
+}
+
+.section-header {
+    margin-bottom: 60px;
+}
+
+.section-tag {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    letter-spacing: 4px;
+    color: var(--rojo);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.section-header h2 {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: 1;
+}
+
+.marcas-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+}
+
+.marca-card {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--blanco);
+    cursor: pointer;
+}
+
+.marca-bg {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.6s ease;
+    background-size: cover;
+    background-position: center;
+}
+
+.porsche-bg { background: linear-gradient(180deg, #1a0a00 0%, #3d1500 100%); }
+.bmw-bg { background: linear-gradient(180deg, #00091a 0%, #001a4d 100%); }
+.f1-bg { background: linear-gradient(180deg, #1a0000 0%, #4d0000 100%); }
+.muscle-bg { background: linear-gradient(180deg, #0a0a00 0%, #1a1a00 100%); }
+
+.marca-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 30%, rgba(0,0,0,0.9) 100%);
+    z-index: 1;
+    transition: opacity 0.4s;
+}
+
+.marca-card:hover .marca-bg {
+    transform: scale(1.06);
+}
+
+.marca-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 32px;
+    z-index: 2;
+}
+
+.marca-icon {
+    font-size: 28px;
+    color: var(--rojo);
+    margin-bottom: 12px;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.marca-card:hover .marca-icon {
+    transform: scale(1.2) rotate(15deg);
+}
+
+.marca-content h3 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.marca-content p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(244,244,240,0.65);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.marca-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.marca-tags span {
+    font-family: var(--font-ui);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border: 1px solid rgba(232,0,29,0.4);
+    color: rgba(232,0,29,0.8);
+    padding: 3px 8px;
+    border-radius: 2px;
+}
+
+.marca-arrow {
+    font-size: 22px;
+    color: var(--rojo);
+    transform: translateX(-10px);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.marca-card:hover .marca-arrow {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* =============================================
+   STATS
+   ============================================= */
+
+.stats-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding: 80px 48px;
+    background: rgba(8,8,8,0.85);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.stat {
+    flex: 1;
+    text-align: center;
+    padding: 20px 40px;
+}
+
+.stat-num {
+    display: block;
+    font-family: var(--font-display);
+    font-size: clamp(52px, 6vw, 80px);
+    color: var(--rojo);
+    line-height: 1;
+}
+
+.stat-label {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(244,244,240,0.45);
+    display: block;
+    margin-top: 8px;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(255,255,255,0.1);
+    flex-shrink: 0;
+}
+
+/* =============================================
+   CTA SECTION
+   ============================================= */
+
+.cta-section {
+    padding: 140px 48px;
+    text-align: center;
+    position: relative;
+}
+
+.cta-content {
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.cta-section .section-tag {
+    margin-bottom: 20px;
+}
+
+.cta-content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(42px, 7vw, 96px);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.cta-content p {
+    font-family: var(--font-body);
+    color: rgba(244,244,240,0.6);
+    font-size: 16px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+.cta-btn {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--negro);
+    text-decoration: none;
+    background: var(--rojo);
+    padding: 18px 48px;
+    transition: background 0.25s, transform 0.2s;
+}
+
+.cta-btn:hover {
+    background: var(--rojo-oscuro);
+    transform: translateY(-2px);
+}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+
+.footer {
+    padding: 40px 48px;
+    background: rgba(4,4,4,0.95);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 4px;
+}
+
+.footer-logo span {
+    color: var(--rojo);
+}
+
+.footer p {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    letter-spacing: 2px;
+    color: rgba(244,244,240,0.3);
+}
+
+.footer-links {
+    display: flex;
+    gap: 24px;
+}
+
+.footer-links a {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(244,244,240,0.4);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--rojo);
+}
+
+/* =============================================
+   ANIMACIONES DE SCROLL
+   ============================================= */
+
+.animar {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition-delay: var(--delay, 0s);
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =============================================
+   PÁGINAS DE MARCA — SUBPÁGINAS
+   ============================================= */
+
+.brand-page body {
+    background: var(--negro);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+
+@media (max-width: 1024px) {
+    .marcas-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .menu { padding: 0 24px; }
+    .links { display: none; }
+    .hamburger { display: block; }
+    .hero {
+    min-height: 100vh; padding: 0 24px 80px; }
+    .hero-scroll { display: none; }
+    .marcas-section { padding: 80px 24px; }
+    .marcas-grid { grid-template-columns: 1fr; }
+    .marca-card { height: 320px; }
+    .stats-section {
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+    .stat-divider { display: none; }
+    .cta-section { padding: 80px 24px; }
+    .footer {
+        flex-direction: column;
+        text-align: center;
+        padding: 32px 24px;
+    }
+}
+
+/* =============================================
+   LOGOS EN TARJETAS DE MARCA
+   ============================================= */
+
+.marca-bg {
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.35) saturate(0.8);
+    transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.marca-card:hover .marca-bg {
+    filter: brightness(0.5) saturate(1);
+}
+
+.marca-overlay-grad {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.95) 100%);
+    z-index: 1;
+}
+
+.marca-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 14px;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.15));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.marca-card:hover .marca-logo {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.35));
+}
+
+/* Quitar el ícono de texto ahora que hay logo */
+.marca-icon {
+    display: none;
+}
+
+/* =============================================
+   LOADER
+   ============================================= */
+
+#loader {
+    position: fixed;
+    inset: 0;
+    background: var(--negro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#loader.oculto {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-logo {
+    font-family: var(--font-display);
+    font-size: 64px;
+    letter-spacing: 8px;
+    color: var(--blanco);
+    animation: pulseLogo 1s ease-in-out infinite alternate;
+}
+
+.loader-logo span { color: var(--rojo); }
+
+@keyframes pulseLogo {
+    from { opacity: 0.5; transform: scale(0.97); }
+    to   { opacity: 1;   transform: scale(1); }
+}
+
+.loader-bar {
+    width: 260px;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loader-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--rojo);
+    animation: fillBar 1.8s ease forwards;
+}
+
+@keyframes fillBar {
+    to { width: 100%; }
+}
+
+.loader-text {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: rgba(244,244,240,0.3);
+    text-transform: uppercase;
+}
+
+/* Cursor personalizado eliminado */
+
+/* =============================================
+   BARRA DE PROGRESO SCROLL
+   ============================================= */
+
+#scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--rojo);
+    z-index: 200;
+    transition: width 0.1s linear;
+}
+
+/* =============================================
+   BOTÓN VOLVER ARRIBA
+   ============================================= */
+
+#back-top {
+    position: fixed;
+    bottom: 80px; right: 24px;
+    width: 44px; height: 44px;
+    background: var(--rojo);
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 999;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+#back-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#back-top:hover {
+    background: var(--rojo-oscuro);
+}
+
+/* =============================================
+   TICKER
+   ============================================= */
+
+.ticker-wrap {
+    overflow: hidden;
+    background: var(--rojo);
+    padding: 12px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.ticker-track {
+    display: flex;
+    gap: 32px;
+    width: max-content;
+    animation: ticker 25s linear infinite;
+    white-space: nowrap;
+}
+
+.ticker-reverse .ticker-track {
+    animation: tickerRev 30s linear infinite;
+    background: transparent;
+}
+
+.ticker-reverse {
+    background: var(--negro);
+    border-color: rgba(232,0,29,0.2);
+}
+
+.ticker-track span {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 4px;
+    color: white;
+}
+
+.ticker-reverse .ticker-track span {
+    color: rgba(244,244,240,0.3);
+}
+
+.ticker-track .sep {
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0;
+}
+
+@keyframes ticker {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@keyframes tickerRev {
+    from { transform: translateX(-50%); }
+    to   { transform: translateX(0); }
+}
+
+/* =============================================
+   EVENTOS CON COUNTDOWN
+   ============================================= */
+
+.eventos-proximos-section {
+    padding: 100px 48px;
+    background: rgba(8,8,8,0.8);
+}
+
+.eventos-countdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    margin-top: 0;
+}
+
+.evento-countdown-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.evento-countdown-card:hover {
+    background: rgba(232,0,29,0.06);
+    border-color: rgba(232,0,29,0.3);
+}
+
+.ec-marca {
+    font-family: var(--font-display);
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--rojo);
+}
+
+.ec-nombre {
+    font-family: var(--font-ui);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+
+.ec-lugar {
+    font-family: var(--font-ui);
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: rgba(244,244,240,0.4);
+    margin-bottom: 8px;
+}
+
+.ec-timer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+}
+
+.ec-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ec-num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    line-height: 1;
+    color: var(--blanco);
+}
+
+.ec-label {
+    font-family: var(--font-ui);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: rgba(244,244,240,0.35);
+    text-transform: uppercase;
+}
+
+.ec-sep {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--rojo);
+    margin-bottom: 14px;
+}
+
+.ec-btn {
+    display: inline-block;
+    font-family: var(--font-ui);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rojo);
+    text-decoration: none;
+    border: 1px solid rgba(232,0,29,0.3);
+    padding: 8px 16px;
+    margin-top: 8px;
+    align-self: flex-start;
+    transition: background 0.2s, color 0.2s;
+}
+
+.ec-btn:hover {
+    background: var(--rojo);
+    color: var(--negro);
+}
+
+/* =============================================
+   GALERÍA
+   ============================================= */
+
+.galeria-section {
+    padding: 100px 48px;
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 200px 200px;
+    gap: 4px;
+    margin-top: 48px;
+}
+
+.galeria-item {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+    transition: filter 0.3s;
+}
+
+.galeria-item.grande {
+    grid-row: span 2;
+}
+
+.galeria-item span {
+    font-family: var(--font-ui);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(244,244,240,0.4);
+    transition: color 0.3s;
+}
+
+.galeria-item:hover {
+    filter: brightness(1.3);
+}
+
+.galeria-item:hover span {
+    color: rgba(244,244,240,0.9);
+}
+
+/* =============================================
+   NEWSLETTER
+   ============================================= */
+
+.newsletter-section {
+    padding: 80px 48px;
+    background: rgba(12,12,12,0.9);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.newsletter-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.newsletter-texto h3 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    margin: 8px 0;
+}
+
+.newsletter-texto p {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(244,244,240,0.5);
+}
+
+.newsletter-form {
+    display: flex;
+    gap: 0;
+    flex-shrink: 0;
+}
+
+.newsletter-form input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-right: none;
+    color: var(--blanco);
+    font-family: var(--font-ui);
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 14px 20px;
+    width: 260px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.newsletter-form input:focus {
+    border-color: var(--rojo);
+}
+
+.newsletter-form button {
+    background: var(--rojo);
+    border: 1px solid var(--rojo);
+    color: white;
+    font-family: var(--font-ui);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 14px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+    background: var(--rojo-oscuro);
+}
+
+.newsletter-ok {
+    text-align: center;
+    font-family: var(--font-ui);
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: var(--rojo);
+    padding: 20px;
+}
+
+/* =============================================
+   LOGOS EN TARJETAS
+   ============================================= */
+
+.marca-bg {
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.35) saturate(0.8);
+    transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.marca-card:hover .marca-bg {
+    filter: brightness(0.5) saturate(1);
+}
+
+.marca-overlay-grad {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 20%, rgba(0,0,0,0.95) 100%);
+    z-index: 1;
+}
+
+.marca-logo {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 14px;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(255,255,255,0.15));
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.marca-card:hover .marca-logo {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.35));
+}
+
+.marca-icon { display: none; }
+
+/* =============================================
+   RESPONSIVE NUEVOS
+   ============================================= */
+
+@media (max-width: 1024px) {
+    .eventos-countdown-grid { grid-template-columns: repeat(2, 1fr); }
+    .galeria-grid { grid-template-columns: repeat(2, 1fr); }
+    .galeria-item.grande { grid-row: span 1; }
+}
+
+@media (max-width: 768px) {
+    .eventos-proximos-section { padding: 60px 24px; }
+    .eventos-countdown-grid { grid-template-columns: 1fr; }
+    .galeria-section { padding: 60px 24px; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .newsletter-section { padding: 60px 24px; }
+    .newsletter-content { flex-direction: column; gap: 32px; }
+    .newsletter-form { flex-direction: column; width: 100%; }
+    .newsletter-form input { width: 100%; border-right: 1px solid rgba(255,255,255,0.12); border-bottom: none; }
+    * { cursor: auto !important; }
+    #cursor, #cursor-ring { display: none; }
+}

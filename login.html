@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso — SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .login-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 24px 40px;
+            position: relative;
+        }
+
+        /* Fondo decorativo */
+        .login-page::before {
+            content: 'SHOWCARS';
+            position: fixed;
+            font-family: var(--font-display);
+            font-size: clamp(80px, 18vw, 220px);
+            color: rgba(255,255,255,0.02);
+            letter-spacing: 8px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 460px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .login-logo {
+            font-family: var(--font-display);
+            font-size: 36px;
+            letter-spacing: 6px;
+            text-align: center;
+            margin-bottom: 48px;
+            display: block;
+            text-decoration: none;
+            color: var(--blanco);
+        }
+        .login-logo span { color: var(--rojo); }
+
+        /* Tabs */
+        .tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            margin-bottom: 32px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-family: var(--font-ui);
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(244,244,240,0.3);
+            padding: 14px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .tab-btn.activo {
+            color: var(--blanco);
+            border-bottom-color: var(--rojo);
+        }
+
+        /* Formulario */
+        .form-panel { display: none; }
+        .form-panel.activo { display: block; }
+
+        .login-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .login-group label {
+            font-family: var(--font-ui);
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(244,244,240,0.35);
+        }
+
+        .login-group input {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--blanco);
+            font-family: var(--font-ui);
+            font-size: 15px;
+            letter-spacing: 1px;
+            padding: 14px 16px;
+            outline: none;
+            border-radius: 2px;
+            transition: border-color 0.2s, background 0.2s;
+            width: 100%;
+        }
+
+        .login-group input:focus {
+            border-color: var(--rojo);
+            background: rgba(232,0,29,0.04);
+        }
+
+        .login-group input.error {
+            border-color: var(--rojo);
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%,100%{transform:translateX(0)}
+            25%{transform:translateX(-6px)}
+            75%{transform:translateX(6px)}
+        }
+
+        .btn-login {
+            width: 100%;
+            background: var(--rojo);
+            border: none;
+            color: white;
+            font-family: var(--font-display);
+            font-size: 22px;
+            letter-spacing: 4px;
+            padding: 18px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s, transform 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-login::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .btn-login:hover::after { transform: translateX(100%); }
+        .btn-login:hover { background: var(--rojo-oscuro); transform: translateY(-1px); }
+        .btn-login:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* Mensaje de error/éxito */
+        .msg {
+            font-family: var(--font-ui);
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 2px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .msg.error {
+            background: rgba(232,0,29,0.1);
+            border: 1px solid rgba(232,0,29,0.3);
+            color: #ff6b6b;
+            display: block;
+        }
+
+        .msg.ok {
+            background: rgba(0,200,80,0.08);
+            border: 1px solid rgba(0,200,80,0.2);
+            color: #4caf50;
+            display: block;
+        }
+
+        .login-divider {
+            text-align: center;
+            font-family: var(--font-ui);
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: rgba(244,244,240,0.2);
+            margin: 24px 0 0;
+            text-transform: uppercase;
+        }
+
+        /* Usuario logueado */
+        #usuario-info {
+            display: none;
+            text-align: center;
+            padding: 32px 0;
+        }
+
+        #usuario-info.visible { display: block; }
+
+        .usuario-avatar {
+            width: 72px;
+            height: 72px;
+            border: 2px solid var(--rojo);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin: 0 auto 20px;
+        }
+
+        .usuario-email {
+            font-family: var(--font-ui);
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: rgba(244,244,240,0.5);
+            margin-bottom: 24px;
+        }
+
+        .usuario-acciones {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-accion {
+            display: block;
+            font-family: var(--font-ui);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            padding: 14px;
+            border-radius: 2px;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-accion.primary {
+            background: var(--rojo);
+            color: white;
+            border: none;
+        }
+
+        .btn-accion.secondary {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(244,244,240,0.5);
+        }
+
+        .btn-accion.secondary:hover {
+            border-color: var(--rojo);
+            color: var(--rojo);
+        }
+
+        #forms-container { display: block; }
+        #forms-container.oculto { display: none; }
+    </style>
+</head>
+<body class="login-page">
+
+    <div class="noise"></div>
+
+    <header>
+        <nav class="menu">
+            <a href="index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="marcas/porsche.html">Porsche</a>
+                <a href="marcas/bmw.html">BMW</a>
+                <a href="marcas/f1.html">F1</a>
+                <a href="marcas/muscle.html">Muscle</a>
+                <a href="carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="login-box">
+        <a href="index.html" class="login-logo">SHOW<span>CARS</span></a>
+
+        <!-- Panel si ya está logueado -->
+        <div id="usuario-info">
+            <div class="usuario-avatar">👤</div>
+            <p style="font-family:var(--font-display);font-size:28px;letter-spacing:2px;margin-bottom:8px;">¡BIENVENIDO!</p>
+            <p class="usuario-email" id="usuario-email-texto"></p>
+            <div class="usuario-acciones">
+                <a href="historial.html" class="btn-accion primary">Ver mis pedidos</a>
+                <a href="carrito.html" class="btn-accion secondary">Ir al carrito</a>
+                <button class="btn-accion secondary" id="btn-logout">Cerrar sesión</button>
+            </div>
+        </div>
+
+        <!-- Formularios -->
+        <div id="forms-container">
+            <div class="tabs">
+                <button class="tab-btn activo" onclick="cambiarTab('login')">Iniciar sesión</button>
+                <button class="tab-btn" onclick="cambiarTab('registro')">Crear cuenta</button>
+            </div>
+
+            <!-- LOGIN -->
+            <div class="form-panel activo" id="panel-login">
+                <div class="login-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" id="login-email" placeholder="tu@correo.com">
+                </div>
+                <div class="login-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="login-pass" placeholder="••••••••">
+                </div>
+                <button class="btn-login" id="btn-login" onclick="handleLogin()">ENTRAR</button>
+                <div class="msg" id="login-msg"></div>
+                <p class="login-divider">¿No tienes cuenta? <a href="#" onclick="cambiarTab('registro')" style="color:var(--rojo);text-decoration:none;">Regístrate gratis</a></p>
+            </div>
+
+            <!-- REGISTRO -->
+            <div class="form-panel" id="panel-registro">
+                <div class="login-group">
+                    <label>Nombre completo</label>
+                    <input type="text" id="reg-nombre" placeholder="Juan Pérez">
+                </div>
+                <div class="login-group">
+                    <label>Correo electrónico</label>
+                    <input type="email" id="reg-email" placeholder="tu@correo.com">
+                </div>
+                <div class="login-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="reg-pass" placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="login-group">
+                    <label>Confirmar contraseña</label>
+                    <input type="password" id="reg-pass2" placeholder="Repite tu contraseña">
+                </div>
+                <button class="btn-login" id="btn-registro" onclick="handleRegistro()">CREAR CUENTA</button>
+                <div class="msg" id="registro-msg"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="carrito.js"></script>
+    <script type="module">
+        import { registrarUsuario, iniciarSesion, cerrarSesion, escucharSesion } from "./firebase.js";
+
+        // --- TABS ---
+        window.cambiarTab = function(tab) {
+            document.querySelectorAll(".tab-btn").forEach((b, i) => {
+                b.classList.toggle("activo", (tab === "login" ? i === 0 : i === 1));
+            });
+            document.getElementById("panel-login").classList.toggle("activo", tab === "login");
+            document.getElementById("panel-registro").classList.toggle("activo", tab === "registro");
+        };
+
+        // --- MOSTRAR MENSAJE ---
+        function mostrarMsg(id, texto, tipo) {
+            const el = document.getElementById(id);
+            el.textContent = texto;
+            el.className = "msg " + tipo;
+        }
+
+        // --- ERRORES FIREBASE EN ESPAÑOL ---
+        function traducirError(code) {
+            const errores = {
+                "auth/email-already-in-use":    "Este correo ya está registrado.",
+                "auth/invalid-email":           "Correo electrónico inválido.",
+                "auth/weak-password":           "La contraseña debe tener al menos 6 caracteres.",
+                "auth/user-not-found":          "No existe una cuenta con este correo.",
+                "auth/wrong-password":          "Contraseña incorrecta.",
+                "auth/invalid-credential":      "Correo o contraseña incorrectos.",
+                "auth/too-many-requests":       "Demasiados intentos. Espera unos minutos.",
+            };
+            return errores[code] || "Ocurrió un error. Intenta de nuevo.";
+        }
+
+        // --- LOGIN ---
+        window.handleLogin = async function() {
+            const email = document.getElementById("login-email").value.trim();
+            const pass  = document.getElementById("login-pass").value;
+            const btn   = document.getElementById("btn-login");
+
+            if (!email || !pass) {
+                mostrarMsg("login-msg", "Completa todos los campos.", "error");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = "VERIFICANDO...";
+
+            try {
+                await iniciarSesion(email, pass);
+                mostrarMsg("login-msg", "✓ Sesión iniciada correctamente.", "ok");
+                setTimeout(() => {
+                    const redir = sessionStorage.getItem("redir_after_login") || "index.html";
+                    sessionStorage.removeItem("redir_after_login");
+                    window.location.href = redir;
+                }, 1000);
+            } catch (err) {
+                mostrarMsg("login-msg", traducirError(err.code), "error");
+                btn.disabled = false;
+                btn.textContent = "ENTRAR";
+            }
+        };
+
+        // --- REGISTRO ---
+        window.handleRegistro = async function() {
+            const nombre = document.getElementById("reg-nombre").value.trim();
+            const email  = document.getElementById("reg-email").value.trim();
+            const pass   = document.getElementById("reg-pass").value;
+            const pass2  = document.getElementById("reg-pass2").value;
+            const btn    = document.getElementById("btn-registro");
+
+            if (!nombre || !email || !pass || !pass2) {
+                mostrarMsg("registro-msg", "Completa todos los campos.", "error");
+                return;
+            }
+            if (pass !== pass2) {
+                mostrarMsg("registro-msg", "Las contraseñas no coinciden.", "error");
+                return;
+            }
+            if (pass.length < 6) {
+                mostrarMsg("registro-msg", "La contraseña debe tener al menos 6 caracteres.", "error");
+                return;
+            }
+
+            btn.disabled = true;
+            btn.textContent = "CREANDO CUENTA...";
+
+            try {
+                await registrarUsuario(email, pass, nombre);
+                mostrarMsg("registro-msg", "✓ ¡Cuenta creada! Redirigiendo...", "ok");
+                setTimeout(() => window.location.href = "index.html", 1200);
+            } catch (err) {
+                mostrarMsg("registro-msg", traducirError(err.code), "error");
+                btn.disabled = false;
+                btn.textContent = "CREAR CUENTA";
+            }
+        };
+
+        // --- ESTADO DE SESIÓN ---
+        escucharSesion((user) => {
+            if (user) {
+                document.getElementById("forms-container").classList.add("oculto");
+                document.getElementById("usuario-info").classList.add("visible");
+                document.getElementById("usuario-email-texto").textContent = user.email;
+            } else {
+                document.getElementById("forms-container").classList.remove("oculto");
+                document.getElementById("usuario-info").classList.remove("visible");
+            }
+        });
+
+        // --- LOGOUT ---
+        document.getElementById("btn-logout").addEventListener("click", async () => {
+            await cerrarSesion();
+        });
+
+        // Enter para enviar
+        document.addEventListener("keydown", (e) => {
+            if (e.key !== "Enter") return;
+            if (document.getElementById("panel-login").classList.contains("activo")) handleLogin();
+            else handleRegistro();
+        });
+    </script>
+</body>
+</html>

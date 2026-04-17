@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fixes puntuales del index */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 48px 80px;
+        }
+
+        #videoFondo {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 40px; right: 48px;
+            z-index: 2;
+        }
+
+        /* Overlay oscuro sobre el video */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8,8,8,0.3) 0%, rgba(8,8,8,0.7) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Ticker fix */
+        .ticker-wrap {
+            overflow: hidden;
+            background: var(--rojo);
+            padding: 12px 0;
+        }
+
+        .ticker-track {
+            display: flex;
+            gap: 32px;
+            width: max-content;
+            animation: ticker 25s linear infinite;
+            white-space: nowrap;
+        }
+
+        .ticker-reverse { background: #0d0d0d; border-top: 1px solid rgba(232,0,29,0.15); }
+        .ticker-reverse .ticker-track { animation: tickerRev 30s linear infinite; }
+        .ticker-reverse .ticker-track span { color: rgba(244,244,240,0.25); }
+
+        .ticker-track span {
+            font-family: var(--font-display);
+            font-size: 15px;
+            letter-spacing: 4px;
+            color: white;
+        }
+
+        .ticker-track .sep { color: rgba(255,255,255,0.4); letter-spacing: 0; }
+
+        @keyframes ticker    { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+        @keyframes tickerRev { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+        /* Countdown grid fix */
+        .eventos-countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 48px;
+        }
+
+        .evento-countdown-card {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.06);
+            padding: 28px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .evento-countdown-card:hover {
+            background: rgba(232,0,29,0.05);
+            border-color: rgba(232,0,29,0.25);
+        }
+
+        .ec-marca {
+            font-family: var(--font-display);
+            font-size: 12px;
+            letter-spacing: 4px;
+            color: var(--rojo);
+        }
+
+        .ec-nombre {
+            font-family: var(--font-ui);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        .ec-lugar {
+            font-family: var(--font-ui);
+            font-size: 11px;
+            color: rgba(244,244,240,0.35);
+            margin-bottom: 4px;
+        }
+
+        .ec-timer {
+            display: flex;
+            align-items: flex-start;
+            gap: 4px;
+            flex-wrap: nowrap;
+        }
+
+        .ec-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 36px;
+        }
+
+        .ec-num {
+            font-family: var(--font-display);
+            font-size: 28px;
+            line-height: 1;
+            color: var(--blanco);
+        }
+
+        .ec-label {
+            font-family: var(--font-ui);
+            font-size: 8px;
+            letter-spacing: 1px;
+            color: rgba(244,244,240,0.3);
+            text-transform: uppercase;
+        }
+
+        .ec-sep {
+            font-family: var(--font-display);
+            font-size: 22px;
+            color: var(--rojo);
+            padding-top: 2px;
+        }
+
+        .ec-btn {
+            display: inline-block;
+            font-family: var(--font-ui);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--rojo);
+            text-decoration: none;
+            border: 1px solid rgba(232,0,29,0.3);
+            padding: 8px 14px;
+            margin-top: 6px;
+            align-self: flex-start;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .ec-btn:hover { background: var(--rojo); color: var(--negro); }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .eventos-countdown-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 0 24px 60px; }
+            .eventos-countdown-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-logo">SHOW<span>CARS</span></div>
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+        <p class="loader-text">CARGANDO EXPERIENCIA</p>
+    </div>
+
+    <!-- BARRA SCROLL -->
+    <div id="scroll-progress"></div>
+
+    <!-- VOLVER ARRIBA -->
+    <button id="back-top">↑</button>
+
+    <div class="noise"></div>
+
+    <div class="control-volumen">
+        <label>VOL</label>
+        <input type="range" min="0" max="1" step="0.01" value="0.5" id="volumen">
+    </div>
+
+    <button id="musica">🔇</button>
+
+    <header>
+        <nav class="menu">
+            <a href="index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="marcas/porsche.html">Porsche</a>
+                <a href="marcas/bmw.html">BMW</a>
+                <a href="marcas/f1.html">F1</a>
+                <a href="marcas/muscle.html">Muscle</a>
+                <a href="login.html">Mi cuenta</a>
+                <a href="carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="marcas/porsche.html">Porsche</a>
+            <a href="marcas/bmw.html">BMW</a>
+            <a href="marcas/f1.html">F1</a>
+            <a href="marcas/muscle.html">Muscle</a>
+            <a href="login.html">Mi cuenta</a>
+            <a href="carrito.html">Carrito</a>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <video autoplay muted loop id="videoFondo" playsinline>
+            <source src="video/fondo.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content">
+            <p class="hero-eyebrow">La experiencia automotriz definitiva</p>
+            <h1>EL MUNDO<br><span class="outline-text">DEL MOTOR</span></h1>
+            <p class="hero-sub">Eventos exclusivos · Mercancía oficial · Cultura del automóvil</p>
+            <a href="#marcas" class="hero-btn">Explorar marcas</a>
+        </div>
+        <div class="hero-scroll">
+            <span>SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- TICKER 1 -->
+    <div class="ticker-wrap">
+        <div class="ticker-track">
+            <span>PORSCHE</span><span class="sep"> · </span>
+            <span>BMW</span><span class="sep"> · </span>
+            <span>FÓRMULA 1</span><span class="sep"> · </span>
+            <span>MUSCLE CARS</span><span class="sep"> · </span>
+            <span>SHOWCARS 2026</span><span class="sep"> · </span>
+            <span>EVENTOS EXCLUSIVOS</span><span class="sep"> · </span>
+            <span>MERCANCÍA OFICIAL</span><span class="sep"> · </span>
+            <span>PORSCHE</span><span class="sep"> · </span>
+            <span>BMW</span><span class="sep"> · </span>
+            <span>FÓRMULA 1</span><span class="sep"> · </span>
+            <span>MUSCLE CARS</span><span class="sep"> · </span>
+            <span>SHOWCARS 2026</span><span class="sep"> · </span>
+            <span>EVENTOS EXCLUSIVOS</span><span class="sep"> · </span>
+            <span>MERCANCÍA OFICIAL</span><span class="sep"> · </span>
+        </div>
+    </div>
+
+    <!-- MARCAS -->
+    <section id="marcas" class="marcas-section">
+        <div class="section-header animar">
+            <span class="section-tag">// CATEGORÍAS</span>
+            <h2>Elige tu mundo</h2>
+        </div>
+        <div class="marcas-grid">
+
+            <a href="marcas/porsche.html" class="marca-card animar" style="--delay:0.1s">
+                <div class="marca-bg" style="background-image:url('Fotos/Porsche.avif');"></div>
+                <div class="marca-overlay-grad"></div>
+                <div class="marca-content">
+                    <img src="img/porsche.png" alt="Porsche" class="marca-logo">
+                    <h3>PORSCHE</h3>
+                    <p>Precisión alemana. Elegancia pura. Leyenda en cada curva.</p>
+                    <div class="marca-tags"><span>Historia</span><span>Eventos</span><span>Mercancía</span></div>
+                    <div class="marca-arrow">→</div>
+                </div>
+            </a>
+
+            <a href="marcas/bmw.html" class="marca-card animar" style="--delay:0.2s">
+                <div class="marca-bg" style="background-image:url('Fotos/BMW.avif');"></div>
+                <div class="marca-overlay-grad"></div>
+                <div class="marca-content">
+                    <img src="img/bmw.png" alt="BMW" class="marca-logo">
+                    <h3>BMW</h3>
+                    <p>La máquina perfecta. Placer de conducir sin compromisos.</p>
+                    <div class="marca-tags"><span>Historia</span><span>Eventos</span><span>Mercancía</span></div>
+                    <div class="marca-arrow">→</div>
+                </div>
+            </a>
+
+            <a href="marcas/f1.html" class="marca-card animar" style="--delay:0.3s">
+                <div class="marca-bg" style="background-image:url('Fotos/F1.jpg');"></div>
+                <div class="marca-overlay-grad"></div>
+                <div class="marca-content">
+                    <img src="img/f1.png" alt="Fórmula 1" class="marca-logo">
+                    <h3>FÓRMULA 1</h3>
+                    <p>La cumbre del motorsport. Velocidad. Adrenalina. Legado.</p>
+                    <div class="marca-tags"><span>Historia</span><span>Eventos</span><span>Mercancía</span></div>
+                    <div class="marca-arrow">→</div>
+                </div>
+            </a>
+
+            <a href="marcas/muscle.html" class="marca-card animar" style="--delay:0.4s">
+                <div class="marca-bg" style="background-image:url('Fotos/Muscle.jpg');"></div>
+                <div class="marca-overlay-grad"></div>
+                <div class="marca-content">
+                    <img src="img/musclecars.jpg" alt="Muscle Cars" class="marca-logo">
+                    <h3>MUSCLE CARS</h3>
+                    <p>Poder americano. V8 rugiente. Libertad sobre asfalto.</p>
+                    <div class="marca-tags"><span>Historia</span><span>Eventos</span><span>Mercancía</span></div>
+                    <div class="marca-arrow">→</div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- TICKER 2 -->
+    <div class="ticker-wrap ticker-reverse">
+        <div class="ticker-track">
+            <span>TRACK DAY</span><span class="sep"> · </span>
+            <span>GT3 RS</span><span class="sep"> · </span>
+            <span>M4 CSL</span><span class="sep"> · </span>
+            <span>HELLCAT</span><span class="sep"> · </span>
+            <span>GRAN PREMIO</span><span class="sep"> · </span>
+            <span>V8 POWER</span><span class="sep"> · </span>
+            <span>NÜRBURGRING</span><span class="sep"> · </span>
+            <span>TRACK DAY</span><span class="sep"> · </span>
+            <span>GT3 RS</span><span class="sep"> · </span>
+            <span>M4 CSL</span><span class="sep"> · </span>
+            <span>HELLCAT</span><span class="sep"> · </span>
+            <span>GRAN PREMIO</span><span class="sep"> · </span>
+            <span>V8 POWER</span><span class="sep"> · </span>
+            <span>NÜRBURGRING</span><span class="sep"> · </span>
+        </div>
+    </div>
+
+    <!-- PRÓXIMOS EVENTOS -->
+    <section id="eventos-proximos" class="eventos-proximos-section">
+        <div class="section-header animar">
+            <span class="section-tag">// AGENDA</span>
+            <h2>Próximos eventos</h2>
+        </div>
+        <div class="eventos-countdown-grid">
+
+            <div class="evento-countdown-card animar" style="--delay:0.1s">
+                <div class="ec-marca">PORSCHE</div>
+                <div class="ec-nombre">Track Day — Monterrey</div>
+                <div class="ec-lugar">📍 Autódromo de Monterrey</div>
+                <div class="ec-timer" data-target="2026-04-22T10:00:00">
+                    <div class="ec-unit"><span class="ec-num" data-type="days">00</span><span class="ec-label">días</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="hours">00</span><span class="ec-label">hrs</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="mins">00</span><span class="ec-label">min</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="secs">00</span><span class="ec-label">seg</span></div>
+                </div>
+                <a href="marcas/porsche.html#eventos" class="ec-btn">Ver detalles</a>
+            </div>
+
+            <div class="evento-countdown-card animar" style="--delay:0.2s">
+                <div class="ec-marca">BMW</div>
+                <div class="ec-nombre">M Power Day — Puebla</div>
+                <div class="ec-lugar">📍 Autódromo Miguel E. Abed</div>
+                <div class="ec-timer" data-target="2026-05-12T09:00:00">
+                    <div class="ec-unit"><span class="ec-num" data-type="days">00</span><span class="ec-label">días</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="hours">00</span><span class="ec-label">hrs</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="mins">00</span><span class="ec-label">min</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="secs">00</span><span class="ec-label">seg</span></div>
+                </div>
+                <a href="marcas/bmw.html#eventos" class="ec-btn">Ver detalles</a>
+            </div>
+
+            <div class="evento-countdown-card animar" style="--delay:0.3s">
+                <div class="ec-marca">F1</div>
+                <div class="ec-nombre">Watch Party GP México</div>
+                <div class="ec-lugar">📍 Ciudad de México</div>
+                <div class="ec-timer" data-target="2026-10-25T14:00:00">
+                    <div class="ec-unit"><span class="ec-num" data-type="days">00</span><span class="ec-label">días</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="hours">00</span><span class="ec-label">hrs</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="mins">00</span><span class="ec-label">min</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="secs">00</span><span class="ec-label">seg</span></div>
+                </div>
+                <a href="marcas/f1.html#eventos" class="ec-btn">Ver detalles</a>
+            </div>
+
+            <div class="evento-countdown-card animar" style="--delay:0.4s">
+                <div class="ec-marca">MUSCLE</div>
+                <div class="ec-nombre">American Muscle Fiesta</div>
+                <div class="ec-lugar">📍 Foro Tepeyac, CDMX</div>
+                <div class="ec-timer" data-target="2026-06-10T12:00:00">
+                    <div class="ec-unit"><span class="ec-num" data-type="days">00</span><span class="ec-label">días</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="hours">00</span><span class="ec-label">hrs</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="mins">00</span><span class="ec-label">min</span></div>
+                    <div class="ec-sep">:</div>
+                    <div class="ec-unit"><span class="ec-num" data-type="secs">00</span><span class="ec-label">seg</span></div>
+                </div>
+                <a href="marcas/muscle.html#eventos" class="ec-btn">Ver detalles</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="stats-section animar">
+        <div class="stat">
+            <span class="stat-num" data-target="12">0</span>
+            <span class="stat-label">Eventos al año</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+            <span class="stat-num" data-target="4">0</span>
+            <span class="stat-label">Marcas exclusivas</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+            <span class="stat-num" data-target="5000">0</span>
+            <span class="stat-label">Fans en comunidad</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat">
+            <span class="stat-num" data-target="200">0</span>
+            <span class="stat-label">Productos oficiales</span>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="tienda" class="cta-section animar">
+        <div class="cta-content">
+            <span class="section-tag">// PRÓXIMO EVENTO</span>
+            <h2>SHOWCARS GRAND TOUR 2026</h2>
+            <p>El evento más esperado del año. Cuatro marcas, un mismo circuito. Vive la experiencia en pista.</p>
+            <a href="#" class="cta-btn">Conseguir entradas</a>
+        </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter-section animar">
+        <div class="newsletter-content">
+            <div class="newsletter-texto">
+                <span class="section-tag">// NEWSLETTER</span>
+                <h3>Sé el primero en enterarte</h3>
+                <p>Eventos, lanzamientos y mercancía exclusiva directo a tu correo.</p>
+            </div>
+            <form class="newsletter-form" onsubmit="submitNewsletter(event)">
+                <input type="email" placeholder="tu@correo.com" required>
+                <button type="submit">SUSCRIBIRME</button>
+            </form>
+        </div>
+        <div id="newsletter-ok" class="newsletter-ok" style="display:none;">
+            ✓ ¡Listo! Te avisamos en el próximo evento.
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">SHOW<span>CARS</span></div>
+        <p>© 2026 Showcars. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script src="carrito.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

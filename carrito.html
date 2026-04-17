@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito — SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="carrito.js"></script>
+    <script type="module" src="firebase-carrito.js"></script>
+    <style>
+        .carrito-page { min-height: 100vh; padding-top: 70px; background: var(--negro); }
+
+        .carrito-header {
+            padding: 60px 80px 40px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex; align-items: flex-end; justify-content: space-between;
+        }
+        .carrito-header h1 { font-family: var(--font-display); font-size: clamp(52px, 8vw, 100px); line-height: 0.9; }
+        .carrito-header h1 span { color: var(--rojo); }
+        .items-count { font-family: var(--font-ui); font-size: 13px; letter-spacing: 3px; color: rgba(244,244,240,0.35); text-transform: uppercase; margin-bottom: 8px; }
+
+        .carrito-layout { display: grid; grid-template-columns: 1fr 420px; min-height: calc(100vh - 250px); }
+
+        /* ITEMS */
+        .carrito-items { padding: 48px 80px; border-right: 1px solid rgba(255,255,255,0.06); }
+        .carrito-items-header { display: grid; grid-template-columns: 1fr 100px 120px 60px; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.06); margin-bottom: 24px; }
+        .carrito-items-header span { font-family: var(--font-ui); font-size: 11px; letter-spacing: 3px; color: rgba(244,244,240,0.3); text-transform: uppercase; }
+        .carrito-items-header span:not(:first-child) { text-align: center; }
+
+        .cart-item { display: grid; grid-template-columns: 1fr 100px 120px 60px; gap: 16px; align-items: center; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.04); animation: fadeInItem 0.4s ease both; }
+        @keyframes fadeInItem { from { opacity:0; transform:translateX(-16px); } to { opacity:1; transform:translateX(0); } }
+
+        .cart-item-info { display: flex; align-items: center; gap: 20px; }
+        .cart-item-img { width: 72px; height: 72px; border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-size: 32px; flex-shrink: 0; background: rgba(255,255,255,0.03); }
+        .cart-item-details h4 { font-family: var(--font-ui); font-size: 15px; font-weight: 700; letter-spacing: 1px; margin-bottom: 4px; }
+        .cart-item-details .marca-tag { font-family: var(--font-ui); font-size: 10px; letter-spacing: 3px; color: var(--rojo); text-transform: uppercase; }
+        .cart-item-price { font-family: var(--font-display); font-size: 22px; color: var(--blanco); text-align: center; }
+
+        .qty-control { display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); }
+        .qty-btn { width: 34px; height: 34px; background: none; border: none; color: var(--blanco); font-size: 18px; cursor: pointer; transition: background 0.2s; font-family: var(--font-ui); }
+        .qty-btn:hover { background: rgba(232,0,29,0.2); }
+        .qty-num { width: 36px; text-align: center; font-family: var(--font-display); font-size: 20px; }
+
+        .cart-item-remove { display: flex; justify-content: center; }
+        .remove-btn { background: none; border: none; color: rgba(244,244,240,0.25); font-size: 18px; cursor: pointer; transition: color 0.2s; padding: 8px; }
+        .remove-btn:hover { color: var(--rojo); }
+
+        .cart-empty { display: none; flex-direction: column; align-items: center; justify-content: center; height: 300px; gap: 20px; text-align: center; }
+        .cart-empty.visible { display: flex; }
+        .cart-empty-icon { font-size: 64px; opacity: 0.2; }
+        .cart-empty h3 { font-family: var(--font-display); font-size: 36px; color: rgba(244,244,240,0.3); }
+        .cart-empty a { font-family: var(--font-ui); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: var(--rojo); text-decoration: none; border: 1px solid var(--rojo); padding: 10px 24px; transition: background 0.2s, color 0.2s; }
+        .cart-empty a:hover { background: var(--rojo); color: var(--negro); }
+
+        /* CHECKOUT */
+        .carrito-checkout { padding: 48px; background: rgba(12,12,12,0.8); display: flex; flex-direction: column; gap: 28px; }
+        .resumen-titulo { font-family: var(--font-display); font-size: 28px; letter-spacing: 2px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+        .resumen-linea { display: flex; justify-content: space-between; align-items: center; font-family: var(--font-ui); font-size: 13px; letter-spacing: 1px; color: rgba(244,244,240,0.55); padding: 6px 0; }
+        .resumen-linea.total { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px; margin-top: 8px; color: var(--blanco); font-size: 16px; font-weight: 700; }
+        .resumen-linea .monto { font-family: var(--font-display); font-size: 22px; color: var(--blanco); }
+        .resumen-linea.total .monto { font-size: 32px; color: var(--rojo); }
+
+        .checkout-divider { display: flex; align-items: center; gap: 12px; }
+        .checkout-divider span { font-family: var(--font-ui); font-size: 11px; letter-spacing: 3px; color: rgba(244,244,240,0.25); text-transform: uppercase; white-space: nowrap; }
+        .checkout-divider::before, .checkout-divider::after { content:''; flex:1; height:1px; background:rgba(255,255,255,0.06); }
+
+        .form-section-title { font-family: var(--font-ui); font-size: 11px; letter-spacing: 4px; color: var(--rojo); text-transform: uppercase; margin-bottom: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+        .form-group label { font-family: var(--font-ui); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(244,244,240,0.35); }
+        .form-group input, .form-group select { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--blanco); font-family: var(--font-ui); font-size: 14px; letter-spacing: 1px; padding: 12px 14px; outline: none; transition: border-color 0.2s, background 0.2s; border-radius: 2px; width: 100%; }
+        .form-group select option { background: #1a1a1a; color: var(--blanco); }
+        .form-group input:focus, .form-group select:focus { border-color: var(--rojo); background: rgba(232,0,29,0.04); }
+        .form-group input.error { border-color: var(--rojo); animation: shake 0.3s ease; }
+        @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+
+        .card-input-wrap { position: relative; }
+        .card-input-wrap input { padding-right: 52px; }
+        .card-type-icon { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 20px; pointer-events: none; }
+
+        .metodos-pago { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 16px; }
+        .metodo-btn { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); color: rgba(244,244,240,0.5); font-family: var(--font-ui); font-size: 12px; letter-spacing: 1px; padding: 12px 8px; cursor: pointer; transition: all 0.2s; text-align: center; border-radius: 2px; }
+        .metodo-btn.activo { border-color: var(--rojo); background: rgba(232,0,29,0.08); color: var(--blanco); }
+        .metodo-btn:hover:not(.activo) { border-color: rgba(255,255,255,0.2); color: var(--blanco); }
+        .metodo-icono { font-size: 20px; display: block; margin-bottom: 4px; }
+
+        .btn-pagar { width: 100%; background: var(--rojo); border: none; color: white; font-family: var(--font-display); font-size: 22px; letter-spacing: 4px; padding: 20px; cursor: pointer; transition: background 0.2s, transform 0.2s; position: relative; overflow: hidden; margin-top: 8px; }
+        .btn-pagar::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,0.1) 50%,transparent 100%); transform:translateX(-100%); transition:transform 0.5s ease; }
+        .btn-pagar:hover::after { transform: translateX(100%); }
+        .btn-pagar:hover { background: var(--rojo-oscuro); transform: translateY(-2px); }
+        .btn-pagar:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        .seguro-info { display: flex; align-items: center; justify-content: center; gap: 8px; font-family: var(--font-ui); font-size: 11px; letter-spacing: 2px; color: rgba(244,244,240,0.25); text-transform: uppercase; }
+
+        /* CONFIRMACIÓN */
+        #confirmacion { display: none; position: fixed; inset: 0; background: var(--negro); z-index: 500; flex-direction: column; align-items: center; justify-content: center; gap: 24px; text-align: center; padding: 40px; }
+        #confirmacion.visible { display: flex; }
+        .confirm-check { width: 80px; height: 80px; border: 2px solid var(--rojo); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 36px; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+        @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+        .confirm-titulo { font-family: var(--font-display); font-size: clamp(40px, 6vw, 80px); line-height: 1; }
+        .confirm-titulo span { color: var(--rojo); }
+        .confirm-sub { font-family: var(--font-ui); font-size: 14px; letter-spacing: 2px; color: rgba(244,244,240,0.5); max-width: 400px; }
+        .confirm-num { font-family: var(--font-display); font-size: 18px; letter-spacing: 4px; color: var(--rojo); background: rgba(232,0,29,0.08); border: 1px solid rgba(232,0,29,0.2); padding: 12px 32px; }
+        .confirm-btns { display: flex; gap: 16px; margin-top: 16px; }
+        .confirm-btns a { font-family: var(--font-ui); font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 14px 32px; border-radius: 2px; transition: all 0.2s; }
+        .confirm-btns .btn-primary { background: var(--rojo); color: white; }
+        .confirm-btns .btn-secondary { border: 1px solid rgba(255,255,255,0.15); color: rgba(244,244,240,0.6); }
+        .confirm-btns .btn-secondary:hover { border-color: var(--rojo); color: var(--rojo); }
+
+        @media (max-width: 1100px) {
+            .carrito-layout { grid-template-columns: 1fr; }
+            .carrito-items { padding: 32px 40px; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .carrito-checkout { padding: 32px 40px; }
+            .carrito-header { padding: 40px 40px 32px; }
+        }
+        @media (max-width: 640px) {
+            .carrito-header { padding: 32px 24px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+            .carrito-items { padding: 24px; }
+            .carrito-checkout { padding: 24px; }
+            .carrito-items-header { display: none; }
+            .cart-item { grid-template-columns: 1fr auto; gap: 12px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body class="carrito-page">
+
+    <div id="scroll-progress"></div>
+
+    <header>
+        <nav class="menu">
+            <a href="index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="marcas/porsche.html">Porsche</a>
+                <a href="marcas/bmw.html">BMW</a>
+                <a href="marcas/f1.html">F1</a>
+                <a href="marcas/muscle.html">Muscle</a>
+                <a href="index.html#galeria">Galería</a>
+                <a href="login.html">Mi cuenta</a>
+                <a href="carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="carrito-header">
+        <div>
+            <p class="items-count">// TU SELECCIÓN</p>
+            <h1>CARRI<span>TO</span></h1>
+        </div>
+        <a href="index.html" style="font-family:var(--font-ui);font-size:12px;letter-spacing:3px;color:rgba(244,244,240,0.3);text-decoration:none;text-transform:uppercase;">← Seguir comprando</a>
+    </div>
+
+    <div class="carrito-layout">
+
+        <!-- ITEMS -->
+        <div class="carrito-items">
+            <div class="carrito-items-header">
+                <span>Producto</span>
+                <span>Precio</span>
+                <span>Cantidad</span>
+                <span>Quitar</span>
+            </div>
+            <div id="items-lista"></div>
+            <div class="cart-empty" id="cart-empty">
+                <div class="cart-empty-icon">🛒</div>
+                <h3>Tu carrito está vacío</h3>
+                <a href="index.html">Explorar productos</a>
+            </div>
+        </div>
+
+        <!-- CHECKOUT -->
+        <div class="carrito-checkout">
+            <div>
+                <h2 class="resumen-titulo">RESUMEN</h2>
+                <div class="resumen-linea"><span>Subtotal</span><span class="monto" id="subtotal">$0</span></div>
+                <div class="resumen-linea"><span>Envío</span><span class="monto" id="envio">$199</span></div>
+                <div class="resumen-linea"><span>IVA (16%)</span><span class="monto" id="iva">$0</span></div>
+                <div class="resumen-linea total"><span>TOTAL</span><span class="monto" id="total">$0</span></div>
+            </div>
+
+            <div class="checkout-divider"><span>// MÉTODO DE PAGO</span></div>
+
+            <div class="metodos-pago">
+                <button class="metodo-btn activo" onclick="seleccionarMetodo(this,'tarjeta')"><span class="metodo-icono">💳</span>Tarjeta</button>
+                <button class="metodo-btn" onclick="seleccionarMetodo(this,'paypal')"><span class="metodo-icono">🅿️</span>PayPal</button>
+                <button class="metodo-btn" onclick="seleccionarMetodo(this,'oxxo')"><span class="metodo-icono">🏪</span>OXXO</button>
+            </div>
+
+            <div id="form-tarjeta">
+                <p class="form-section-title">// DATOS DE TARJETA</p>
+                <div class="form-group"><label>Nombre en la tarjeta</label><input type="text" id="nombre-tarjeta" placeholder="JUAN PÉREZ" maxlength="26"></div>
+                <div class="form-group"><label>Número de tarjeta</label><div class="card-input-wrap"><input type="text" id="numero-tarjeta" placeholder="0000 0000 0000 0000" maxlength="19"><span class="card-type-icon" id="card-icon">💳</span></div></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Vencimiento</label><input type="text" id="vencimiento" placeholder="MM/AA" maxlength="5"></div>
+                    <div class="form-group"><label>CVV</label><input type="text" id="cvv" placeholder="•••" maxlength="4"></div>
+                </div>
+                <div class="checkout-divider" style="margin:8px 0"><span>// DATOS DE ENVÍO</span></div>
+                <div class="form-group" style="margin-top:16px"><label>Correo electrónico</label><input type="email" id="correo" placeholder="tu@correo.com"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Nombre</label><input type="text" id="nombre" placeholder="Juan"></div>
+                    <div class="form-group"><label>Apellido</label><input type="text" id="apellido" placeholder="Pérez"></div>
+                </div>
+                <div class="form-group"><label>Dirección</label><input type="text" id="direccion" placeholder="Calle y número"></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Ciudad</label><input type="text" id="ciudad" placeholder="Ciudad de México"></div>
+                    <div class="form-group"><label>C.P.</label><input type="text" id="cp" placeholder="06600" maxlength="5"></div>
+                </div>
+                <div class="form-group"><label>Estado</label>
+                    <select id="estado">
+                        <option value="">Selecciona...</option>
+                        <option>Ciudad de México</option><option>Jalisco</option><option>Nuevo León</option>
+                        <option>Puebla</option><option>Guanajuato</option><option>Estado de México</option>
+                        <option>Querétaro</option><option>Otro</option>
+                    </select>
+                </div>
+            </div>
+
+            <div id="form-paypal" style="display:none;text-align:center;padding:32px 0;">
+                <div style="font-size:48px;margin-bottom:16px;">🅿️</div>
+                <p style="font-family:var(--font-ui);font-size:13px;letter-spacing:2px;color:rgba(244,244,240,0.5);">Al confirmar serás redirigido a PayPal para completar el pago de forma segura.</p>
+            </div>
+
+            <div id="form-oxxo" style="display:none;text-align:center;padding:32px 0;">
+                <div style="font-size:48px;margin-bottom:16px;">🏪</div>
+                <p style="font-family:var(--font-ui);font-size:13px;letter-spacing:2px;color:rgba(244,244,240,0.5);">Al confirmar recibirás una ficha de pago por correo para pagar en cualquier OXXO. Válida 48 horas.</p>
+            </div>
+
+            <div>
+                <button class="btn-pagar" id="btn-pagar" onclick="procesarPago()">CONFIRMAR PAGO</button>
+                <div class="seguro-info" style="margin-top:14px;">🔒 <span>Pago 100% seguro y encriptado</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONFIRMACIÓN -->
+    <div id="confirmacion">
+        <div class="confirm-check">✓</div>
+        <h2 class="confirm-titulo">¡PEDIDO<br><span>CONFIRMADO</span>!</h2>
+        <p class="confirm-sub">Gracias por tu compra. Recibirás un correo con los detalles de tu pedido y guía de envío.</p>
+        <div class="confirm-num" id="orden-num"># SC-000000</div>
+        <div class="confirm-btns">
+            <a href="index.html" class="btn-primary">Seguir explorando</a>
+            <a href="#" class="btn-secondary" onclick="window.print()">Imprimir recibo</a>
+        </div>
+    </div>
+
+    <script>
+    // =============================================
+    // CARRITO PAGE — LEE localStorage
+    // =============================================
+
+    const ENVIO_COSTO = 199;
+    let metodoActivo = 'tarjeta';
+
+    // --- RENDERIZAR ITEMS ---
+    function renderCarrito() {
+        const carrito = getCarrito();
+        const lista = document.getElementById("items-lista");
+        const empty = document.getElementById("cart-empty");
+        const btnPagar = document.getElementById("btn-pagar");
+
+        lista.innerHTML = "";
+
+        if (carrito.length === 0) {
+            empty.classList.add("visible");
+            btnPagar.disabled = true;
+            calcularTotales();
+            return;
+        }
+
+        empty.classList.remove("visible");
+        btnPagar.disabled = false;
+
+        carrito.forEach((prod, i) => {
+            const div = document.createElement("div");
+            div.className = "cart-item";
+            div.dataset.id = prod.id;
+            div.style.animationDelay = (i * 0.08) + "s";
+            div.innerHTML = `
+                <div class="cart-item-info">
+                    <div class="cart-item-img">${prod.icono || "🛍️"}</div>
+                    <div class="cart-item-details">
+                        <h4>${prod.nombre}</h4>
+                        <span class="marca-tag">${prod.marca}</span>
+                        ${prod.tipo === 'evento' ? `<span style="font-family:var(--font-ui);font-size:10px;letter-spacing:1px;color:rgba(244,244,240,0.35);display:block;margin-top:2px;">📅 ${prod.fecha} &nbsp;·&nbsp; 📍 ${prod.lugar}</span>` : ''}
+                    </div>
+                </div>
+                <div class="cart-item-price">$${prod.precio.toLocaleString()}</div>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="cambiarQty(${prod.id}, -1)">−</button>
+                    <span class="qty-num">${prod.qty}</span>
+                    <button class="qty-btn" onclick="cambiarQty(${prod.id}, +1)">+</button>
+                </div>
+                <div class="cart-item-remove">
+                    <button class="remove-btn" onclick="eliminarItem(${prod.id})" title="Eliminar">✕</button>
+                </div>
+            `;
+            lista.appendChild(div);
+        });
+
+        calcularTotales();
+    }
+
+    // --- CALCULAR TOTALES ---
+    function calcularTotales() {
+        const carrito = getCarrito();
+        const subtotal = carrito.reduce((sum, p) => sum + p.precio * p.qty, 0);
+        const envio = carrito.length > 0 ? ENVIO_COSTO : 0;
+        const iva = Math.round(subtotal * 0.16);
+        const total = subtotal + envio + iva;
+
+        document.getElementById("subtotal").textContent = "$" + subtotal.toLocaleString();
+        document.getElementById("envio").textContent    = "$" + envio.toLocaleString();
+        document.getElementById("iva").textContent      = "$" + iva.toLocaleString();
+        document.getElementById("total").textContent    = "$" + total.toLocaleString();
+    }
+
+    // --- CAMBIAR CANTIDAD ---
+    function cambiarQty(id, delta) {
+        const carrito = getCarrito();
+        const prod = carrito.find(p => p.id === id);
+        if (!prod) return;
+        prod.qty = Math.max(1, prod.qty + delta);
+        saveCarrito(carrito);
+        renderCarrito();
+        actualizarContadorNav();
+    }
+
+    // --- ELIMINAR ---
+    function eliminarItem(id) {
+        const item = document.querySelector(`.cart-item[data-id="${id}"]`);
+        if (item) {
+            item.style.transition = "opacity 0.3s, transform 0.3s";
+            item.style.opacity = "0";
+            item.style.transform = "translateX(40px)";
+        }
+        setTimeout(() => {
+            let carrito = getCarrito().filter(p => p.id !== id);
+            saveCarrito(carrito);
+            renderCarrito();
+            actualizarContadorNav();
+        }, 300);
+    }
+
+    // --- MÉTODO DE PAGO ---
+    function seleccionarMetodo(btn, metodo) {
+        document.querySelectorAll(".metodo-btn").forEach(b => b.classList.remove("activo"));
+        btn.classList.add("activo");
+        metodoActivo = metodo;
+        document.getElementById("form-tarjeta").style.display = metodo === "tarjeta" ? "block" : "none";
+        document.getElementById("form-paypal").style.display  = metodo === "paypal"  ? "block" : "none";
+        document.getElementById("form-oxxo").style.display    = metodo === "oxxo"    ? "block" : "none";
+    }
+
+    // --- FORMATO TARJETA ---
+    document.getElementById("numero-tarjeta").addEventListener("input", function() {
+        let v = this.value.replace(/\D/g,"").substring(0,16);
+        this.value = v.replace(/(.{4})/g,"$1 ").trim();
+        const icon = document.getElementById("card-icon");
+        icon.textContent = v.startsWith("4") ? "💳" : v.startsWith("5") ? "🔵" : v.startsWith("3") ? "🟡" : "💳";
+    });
+    document.getElementById("vencimiento").addEventListener("input", function() {
+        let v = this.value.replace(/\D/g,"").substring(0,4);
+        if (v.length >= 2) v = v.substring(0,2) + "/" + v.substring(2);
+        this.value = v;
+    });
+    document.getElementById("cvv").addEventListener("input", function() { this.value = this.value.replace(/\D/g,"").substring(0,4); });
+    document.getElementById("cp").addEventListener("input", function() { this.value = this.value.replace(/\D/g,"").substring(0,5); });
+
+    // --- VALIDACIÓN ---
+    function validarCampos() {
+        let ok = true;
+        const campos = [
+            {id:"nombre-tarjeta",min:3},{id:"numero-tarjeta",min:19},
+            {id:"vencimiento",min:5},{id:"cvv",min:3},
+            {id:"correo",min:5},{id:"nombre",min:2},{id:"apellido",min:2},
+            {id:"direccion",min:5},{id:"ciudad",min:2},{id:"cp",min:5},
+        ];
+        campos.forEach(c => {
+            const el = document.getElementById(c.id);
+            if (el && el.value.trim().length < c.min) {
+                el.classList.add("error");
+                ok = false;
+                setTimeout(() => el.classList.remove("error"), 800);
+            }
+        });
+        const est = document.getElementById("estado");
+        if (est && !est.value) { est.style.borderColor="var(--rojo)"; ok=false; setTimeout(()=>est.style.borderColor="",800); }
+        return ok;
+    }
+
+    // --- PROCESAR PAGO ---
+    function procesarPago() {
+        if (metodoActivo === "tarjeta" && !validarCampos()) return;
+        // Si Firebase está disponible, usarlo
+        if (typeof window.procesarPagoFirebase === "function") {
+            window.procesarPagoFirebase(metodoActivo);
+        } else {
+            // Fallback sin Firebase
+            const btn = document.getElementById("btn-pagar");
+            btn.textContent = "PROCESANDO...";
+            btn.disabled = true;
+            setTimeout(() => {
+                saveCarrito([]);
+                actualizarContadorNav();
+                const orden = "SC-" + Math.floor(100000 + Math.random() * 900000);
+                document.getElementById("orden-num").textContent = "# " + orden;
+                document.getElementById("confirmacion").classList.add("visible");
+            }, 2200);
+        }
+    }
+
+    // --- SCROLL PROGRESS ---
+    window.addEventListener("scroll", () => {
+        const bar = document.getElementById("scroll-progress");
+        if (bar) bar.style.width = (window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100) + "%";
+    });
+
+    // INIT
+    renderCarrito();
+    </script>
+</body>
+</html>

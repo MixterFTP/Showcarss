@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW — SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="marca.css">
+    <style>
+        :root {
+            --brand-color: #4a90d9;
+            --brand-dark: #1e5fa0;
+            --brand-glow: rgba(74,144,217,0.12);
+        }
+    </style>
+    <script src="../carrito.js"></script>
+</head>
+<body class="brand-page">
+
+        <div class="noise"></div>
+
+    <button id="musica" style="z-index:999;">🔊</button>
+
+    <header>
+        <nav class="menu">
+            <a href="../index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="porsche.html">Porsche</a>
+                <a href="bmw.html" class="active">BMW</a>
+                <a href="f1.html">F1</a>
+                <a href="muscle.html">Muscle</a>
+                <a href="../carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="porsche.html">Porsche</a>
+            <a href="bmw.html">BMW</a>
+            <a href="f1.html">F1</a>
+            <a href="muscle.html">Muscle</a>
+        </div>
+    </header>
+
+    <section class="brand-hero" style="background-image:url('../Fotos/BMW.avif');background-size:cover;background-position:center;">
+        <div class="brand-hero-content">
+            <a href="../index.html" class="back-link">← Volver</a>
+            <div class="brand-eyebrow">SINCE 1916</div>
+            <h1 class="brand-title">BMW</h1>
+            <p class="brand-subtitle">Freude am Fahren. El placer de conducir.</p>
+            <div class="brand-nav-pills">
+                <a href="#historia" class="pill active">Historia</a>
+                <a href="#eventos" class="pill">Eventos</a>
+                <a href="#merch" class="pill">Mercancía</a>
+            </div>
+        </div>
+        <div class="brand-hero-emblem">◎</div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia" class="brand-section historia-section">
+        <div class="section-header animar">
+            <span class="section-tag">// HISTORIA</span>
+            <h2>Nacida para la velocidad</h2>
+        </div>
+
+        <div class="historia-grid">
+            <div class="historia-texto animar">
+                <p>Fundada en <strong>1916</strong> en Munich, Bavarian Motor Works comenzó su historia fabricando motores de avión. La hélice en movimiento de su logo original refleja precisamente ese origen aeronáutico.</p>
+                <p>Tras la Primera Guerra Mundial, la empresa se reinventó fabricando motocicletas y después automóviles. El <strong>BMW 328</strong> de 1936 ya era considerado un prodigio técnico para su época, dominando las competiciones europeas.</p>
+                <p>La era moderna de BMW comenzó en los años 70 con la <strong>serie M</strong>, una división creada exclusivamente para el motorsport que transformó los modelos de producción en bestias de rendimiento.</p>
+                <p>Hoy, BMW lidera la innovación con tecnologías de conducción autónoma, plataformas eléctricas y el concepto "Neue Klasse" que definirá la próxima década de movilidad premium.</p>
+            </div>
+            <div class="historia-hitos animar" style="--delay:0.2s">
+                <div class="hito">
+                    <span class="hito-año">1916</span>
+                    <span class="hito-evento">Fundación en Munich. Producción de motores de avión.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1936</span>
+                    <span class="hito-evento">BMW 328: el deportivo más avanzado de la preguerra.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1972</span>
+                    <span class="hito-evento">Creación de BMW M GmbH. Nace la división de alto rendimiento.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1999</span>
+                    <span class="hito-evento">BMW M5 E39: considerado el mejor sedán deportivo de todos los tiempos.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">2021</span>
+                    <span class="hito-evento">BMW M4 Competition xDrive: el M más rápido en Nürburgring.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modelos-destacados">
+            <h3 class="animar">Serie M — Modelos de referencia</h3>
+            <div class="modelos-grid">
+                <div class="modelo-card animar" style="--delay:0.1s">
+                    <div class="modelo-numero">M3</div>
+                    <div class="modelo-info">
+                        <strong>Competition</strong>
+                        <span>510 CV · S58 3.0T · RWD/xDrive</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.2s">
+                    <div class="modelo-numero">M4</div>
+                    <div class="modelo-info">
+                        <strong>CSL</strong>
+                        <span>550 CV · S58 · Track edition</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.3s">
+                    <div class="modelo-numero">M8</div>
+                    <div class="modelo-info">
+                        <strong>Gran Coupé</strong>
+                        <span>625 CV · V8 4.4T · xDrive</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.4s">
+                    <div class="modelo-numero">XM</div>
+                    <div class="modelo-info">
+                        <strong>Label Red</strong>
+                        <span>748 CV · Híbrido · SUV M</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos" class="brand-section eventos-section">
+        <div class="section-header animar">
+            <span class="section-tag">// EVENTOS</span>
+            <h2>Próximas experiencias</h2>
+        </div>
+
+        <div class="eventos-grid">
+
+            <div class="evento-card evento-featured animar">
+                <div class="evento-fecha">
+                    <span class="mes">ABR</span>
+                    <span class="dia">12</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">EXCLUSIVO</span>
+                    <h3>BMW M Power Day — Puebla</h3>
+                    <p>Sesión de manejo extremo en el Autódromo Miguel E. Abed. Conducción de M3, M4 y M5 con instructores certificados. Telemetría en tiempo real e instructaje personalizado.</p>
+                    <div class="evento-meta">
+                        <span>📍 Puebla, PUE</span>
+                        <span>👥 24 plazas</span>
+                        <span>💰 $5,200 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:82001, nombre:'BMW M Power Day — Puebla', marca:'BMW', precio:5200, icono:'🎫', tipo:'evento', fecha:'ABR 12', lugar:'Puebla, PUE'})">Reservar plaza</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.1s">
+                <div class="evento-fecha">
+                    <span class="mes">MAY</span>
+                    <span class="dia">3</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">CONCURSO</span>
+                    <h3>BMW Concours d'Elegance</h3>
+                    <p>Exhibición y concurso de los BMWs más hermosos de México. Categorías Classic, Modern y M. Jurado internacional y premios para los tres mejores.</p>
+                    <div class="evento-meta">
+                        <span>📍 CDMX</span>
+                        <span>👥 Abierto</span>
+                        <span>💰 $400 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:82002, nombre:'BMW Concours d\'Elegance', marca:'BMW', precio:400, icono:'🎫', tipo:'evento', fecha:'MAY 3', lugar:'CDMX'})">Comprar entrada</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.2s">
+                <div class="evento-fecha">
+                    <span class="mes">JUN</span>
+                    <span class="dia">21</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">TOUR</span>
+                    <h3>M Road Trip — Oaxaca</h3>
+                    <p>Ruta de tres días por la Sierra Norte de Oaxaca en caravana de autos M. Hoteles boutique, gastronomía local y carreteras espectaculares.</p>
+                    <div class="evento-meta">
+                        <span>📍 CDMX → Oaxaca</span>
+                        <span>👥 15 autos</span>
+                        <span>💰 $8,500 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:82003, nombre:'M Road Trip — Oaxaca', marca:'BMW', precio:8500, icono:'🎫', tipo:'evento', fecha:'JUN 21', lugar:'CDMX → Oaxaca'})">Reservar lugar</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.3s">
+                <div class="evento-fecha">
+                    <span class="mes">AGO</span>
+                    <span class="dia">10</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">DRIFT</span>
+                    <h3>BMW Drift Championship — CDMX</h3>
+                    <p>Competencia de drift en estacionamiento privado. Categorías amateur y pro. Música, comida y la mejor atmósfera car culture.</p>
+                    <div class="evento-meta">
+                        <span>📍 Santa Fe, CDMX</span>
+                        <span>👥 Abierto</span>
+                        <span>💰 $600 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:82004, nombre:'BMW Drift Championship — CDMX', marca:'BMW', precio:600, icono:'🎫', tipo:'evento', fecha:'AGO 10', lugar:'Santa Fe, CDMX'})">Comprar entrada</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MERCANCÍA -->
+    <section id="merch" class="brand-section merch-section">
+        <div class="section-header animar">
+            <span class="section-tag">// MERCANCÍA</span>
+            <h2>Colección oficial BMW M</h2>
+        </div>
+
+        <div class="merch-grid">
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #000a1a 0%, #001a3d 100%);">
+                    <span class="merch-icon">🧥</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Chaqueta BMW M Motorsport</h4>
+                    <p>Colores racing clásicos. Softshell impermeable.</p>
+                    <div class="merch-precio">
+                        <span>$3,200 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:74821, nombre:'Chaqueta BMW M Motorsport', marca:'BMW', precio:3200, icono:'🧥'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #00091a 0%, #001630 100%);">
+                    <span class="merch-icon">🏎️</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Modelo M4 GTR Le Mans 1:18</h4>
+                    <p>Art Car edición. Metal y resina. Numerado.</p>
+                    <div class="merch-precio">
+                        <span>$4,100 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:74822, nombre:'Modelo M4 GTR Le Mans 1:18', marca:'BMW', precio:4100, icono:'🏎️'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #000810 0%, #001228 100%);">
+                    <span class="merch-icon">🎒</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Backpack BMW M Performance</h4>
+                    <p>Nylon premium. Compartimento laptop 15". Logo M.</p>
+                    <div class="merch-precio">
+                        <span>$1,650 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:74823, nombre:'Backpack BMW M Performance', marca:'BMW', precio:1650, icono:'🎒'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #000a1a 0%, #001830 100%);">
+                    <span class="merch-icon">👕</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Jersey BMW M Race Edition</h4>
+                    <p>Corte slim. Tela técnica. Colores Azul/Rojo/Morado.</p>
+                    <div class="merch-precio">
+                        <span>$980 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:74824, nombre:'Jersey BMW M Race Edition', marca:'BMW', precio:980, icono:'👕'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #00091a 0%, #001529 100%);">
+                    <span class="merch-icon">📚</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Libro BMW Art Cars — 50 años</h4>
+                    <p>Historia completa de los Art Cars. Formato XXL.</p>
+                    <div class="merch-precio">
+                        <span>$3,800 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:74825, nombre:'Libro BMW Art Cars 50 años', marca:'BMW', precio:3800, icono:'📖'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #000710 0%, #001020 100%);">
+                    <span class="merch-icon">🧢</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Gorra BMW M Retro 80s</h4>
+                    <p>Estilo vintage. Parche bordado. Ajustable.</p>
+                    <div class="merch-precio">
+                        <span>$750 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:74826, nombre:'Gorra BMW M Retro 80s', marca:'BMW', precio:750, icono:'🧢'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">SHOW<span>CARS</span></div>
+        <p>© 2025 Showcars. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="marca.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Porsche — SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="marca.css">
+    <style>
+        :root {
+            --brand-color: #c9a84c;
+            --brand-dark: #7a5f1e;
+            --brand-glow: rgba(201,168,76,0.15);
+        }
+    </style>
+    <script src="../carrito.js"></script>
+</head>
+<body class="brand-page">
+
+        <div class="noise"></div>
+
+    <button id="musica" style="z-index:999;">🔊</button>
+
+    <header>
+        <nav class="menu">
+            <a href="../index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="porsche.html" class="active">Porsche</a>
+                <a href="bmw.html">BMW</a>
+                <a href="f1.html">F1</a>
+                <a href="muscle.html">Muscle</a>
+                <a href="../carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="porsche.html">Porsche</a>
+            <a href="bmw.html">BMW</a>
+            <a href="f1.html">F1</a>
+            <a href="muscle.html">Muscle</a>
+        </div>
+    </header>
+
+    <!-- HERO DE MARCA -->
+    <section class="brand-hero" style="background-image:url('../Fotos/Porsche.avif');background-size:cover;background-position:center;">
+        <div class="brand-hero-content">
+            <a href="../index.html" class="back-link">← Volver</a>
+            <div class="brand-eyebrow">SINCE 1948</div>
+            <h1 class="brand-title">PORSCHE</h1>
+            <p class="brand-subtitle">Precisión alemana. Elegancia sin concesiones.</p>
+            <div class="brand-nav-pills">
+                <a href="#historia" class="pill active">Historia</a>
+                <a href="#eventos" class="pill">Eventos</a>
+                <a href="#merch" class="pill">Mercancía</a>
+            </div>
+        </div>
+        <div class="brand-hero-emblem">⬡</div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia" class="brand-section historia-section">
+        <div class="section-header animar">
+            <span class="section-tag">// HISTORIA</span>
+            <h2>Una leyenda sobre ruedas</h2>
+        </div>
+
+        <div class="historia-grid">
+            <div class="historia-texto animar">
+                <p>Fundada en <strong>1948</strong> por Ferdinand Porsche en Stuttgart, Alemania, la marca nació con una visión simple pero radical: construir el coche deportivo definitivo con los recursos disponibles tras la Segunda Guerra Mundial.</p>
+                <p>El primer modelo, el <strong>356</strong>, fue ensamblado casi artesanalmente y estableció los principios que definen a Porsche hasta hoy: motor trasero, ligereza extrema y dinámica de conducción única.</p>
+                <p>Con la llegada del icónico <strong>911 en 1963</strong>, Porsche consolidó su identidad como fabricante de deportivos puros. Más de seis décadas después, el 911 continúa en producción, evolucionando sin perder su esencia.</p>
+                <p>En las pistas de carreras, Porsche es la marca más exitosa de <strong>Le Mans</strong>, con 19 victorias generales, además de innumerables títulos en el Campeonato del Mundo de Resistencia.</p>
+            </div>
+            <div class="historia-hitos animar" style="--delay:0.2s">
+                <div class="hito">
+                    <span class="hito-año">1948</span>
+                    <span class="hito-evento">Fundación de Porsche. Primer 356 ensamblado en Gmünd.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1963</span>
+                    <span class="hito-evento">Debut del legendario 911 en el Salón de Frankfurt.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1970</span>
+                    <span class="hito-evento">Primera victoria en las 24 Horas de Le Mans.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1984</span>
+                    <span class="hito-evento">El 959: el superdeportivo más avanzado de su era.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">2019</span>
+                    <span class="hito-evento">Taycan: primer Porsche 100% eléctrico.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modelos-destacados">
+            <h3 class="animar">Modelos icónicos</h3>
+            <div class="modelos-grid">
+                <div class="modelo-card animar" style="--delay:0.1s">
+                    <div class="modelo-numero">911</div>
+                    <div class="modelo-info">
+                        <strong>Carrera S</strong>
+                        <span>450 CV · Bóxer 3.0T · RWD</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.2s">
+                    <div class="modelo-numero">718</div>
+                    <div class="modelo-info">
+                        <strong>Boxster GTS</strong>
+                        <span>400 CV · Bóxer 4.0 · Cabrio</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.3s">
+                    <div class="modelo-numero">GT3</div>
+                    <div class="modelo-info">
+                        <strong>RS Touring</strong>
+                        <span>510 CV · Atmosférico · Track</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.4s">
+                    <div class="modelo-numero">RSR</div>
+                    <div class="modelo-info">
+                        <strong>Le Mans 24h</strong>
+                        <span>Competition · GTE-Pro</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos" class="brand-section eventos-section">
+        <div class="section-header animar">
+            <span class="section-tag">// EVENTOS</span>
+            <h2>Próximas experiencias</h2>
+        </div>
+
+        <div class="eventos-grid">
+
+            <div class="evento-card evento-featured animar">
+                <div class="evento-fecha">
+                    <span class="mes">MAR</span>
+                    <span class="dia">22</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">EXCLUSIVO</span>
+                    <h3>Porsche Track Day — Monterrey</h3>
+                    <p>Lleva tu 911 al límite en el Autódromo de Monterrey con instructores oficiales Porsche. Sesiones de 20 minutos en pista, telemetría en vivo y análisis post-sesión.</p>
+                    <div class="evento-meta">
+                        <span>📍 Monterrey, NL</span>
+                        <span>👥 30 plazas</span>
+                        <span>💰 $4,500 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:81001, nombre:'Porsche Track Day — Monterrey', marca:'Porsche', precio:4500, icono:'🎫', tipo:'evento', fecha:'MAR 22', lugar:'Monterrey, NL'})">Reservar plaza</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.1s">
+                <div class="evento-fecha">
+                    <span class="mes">ABR</span>
+                    <span class="dia">5</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">TOUR</span>
+                    <h3>Porsche Drive — Ruta de Montaña</h3>
+                    <p>Caravana de 20 Porsches por las carreteras de la Sierra Madre. Desayuno de inicio, almuerzo en hacienda y sesión fotográfica profesional.</p>
+                    <div class="evento-meta">
+                        <span>📍 CDMX → Puebla</span>
+                        <span>👥 20 autos</span>
+                        <span>💰 $2,800 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:81002, nombre:'Porsche Drive — Ruta de Montaña', marca:'Porsche', precio:2800, icono:'🎫', tipo:'evento', fecha:'ABR 5', lugar:'CDMX → Puebla'})">Reservar plaza</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.2s">
+                <div class="evento-fecha">
+                    <span class="mes">MAY</span>
+                    <span class="dia">18</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">EXPOSICIÓN</span>
+                    <h3>Classic Porsche Show</h3>
+                    <p>Exposición estática de los modelos más históricos de la marca. 356, 904, 917 y más de 40 años de historia del 911.</p>
+                    <div class="evento-meta">
+                        <span>📍 Guadalajara, JAL</span>
+                        <span>👥 Abierto al público</span>
+                        <span>💰 $350 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:81003, nombre:'Classic Porsche Show', marca:'Porsche', precio:350, icono:'🎫', tipo:'evento', fecha:'MAY 18', lugar:'Guadalajara, JAL'})">Comprar entrada</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.3s">
+                <div class="evento-fecha">
+                    <span class="mes">JUN</span>
+                    <span class="dia">7</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">CLUB</span>
+                    <h3>Porsche Club México — Reunión mensual</h3>
+                    <p>Reunión informal de entusiastas Porsche. Café, conversaciones y automóviles espectaculares. ¡Todos los modelos son bienvenidos!</p>
+                    <div class="evento-meta">
+                        <span>📍 CDMX</span>
+                        <span>👥 Miembros del club</span>
+                        <span>💰 Gratuito</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirEvento({id:81004, nombre:'Porsche Club México — Reunión mensual', marca:'Porsche', precio:0, fecha:'JUN 7', lugar:'CDMX'})">Registrarse gratis</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MERCANCÍA -->
+    <section id="merch" class="brand-section merch-section">
+        <div class="section-header animar">
+            <span class="section-tag">// MERCANCÍA</span>
+            <h2>Colección oficial</h2>
+        </div>
+
+        <div class="merch-grid">
+
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #1a1000 0%, #3d2800 100%);">
+                    <span class="merch-icon">👕</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Polo Porsche Motorsport</h4>
+                    <p>Tela técnica premium. Bordado oficial.</p>
+                    <div class="merch-precio">
+                        <span>$1,299 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:73821, nombre:'Polo Porsche Motorsport', marca:'Porsche', precio:1299, icono:'👕'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #0a0800 0%, #2a2000 100%);">
+                    <span class="merch-icon">🧢</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Gorra 911 Heritage Edition</h4>
+                    <p>Edición limitada 75 aniversario.</p>
+                    <div class="merch-precio">
+                        <span>$849 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:73822, nombre:'Gorra 911 Heritage Edition', marca:'Porsche', precio:849, icono:'🧢'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #150d00 0%, #3d2900 100%);">
+                    <span class="merch-icon">🏎️</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Modelo a escala 911 GT3 RS 1:18</h4>
+                    <p>Metal fundido. Detalles ultra realistas.</p>
+                    <div class="merch-precio">
+                        <span>$3,499 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:73823, nombre:'Modelo a escala 911 GT3 RS 1:18', marca:'Porsche', precio:3499, icono:'🏎️'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.4s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #0d0900 0%, #302000 100%);">
+                    <span class="merch-icon">⌚</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Cronógrafo Porsche Design</h4>
+                    <p>Inspirado en el tacómetro del 911.</p>
+                    <div class="merch-precio">
+                        <span>$18,500 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:73824, nombre:'Cronógrafo Porsche Design', marca:'Porsche', precio:18500, icono:'⌚'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #120a00 0%, #3a2200 100%);">
+                    <span class="merch-icon">📖</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Libro "Porsche: The Complete History"</h4>
+                    <p>Edición de lujo. Tapa dura. 400 páginas.</p>
+                    <div class="merch-precio">
+                        <span>$2,200 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:73825, nombre:'Libro Porsche: The Complete History', marca:'Porsche', precio:2200, icono:'📖'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #100900 0%, #2f2100 100%);">
+                    <span class="merch-icon">🧳</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Set de Maletas Porsche Lifestyle</h4>
+                    <p>Diseñadas para el maletero del 911. Set de 2.</p>
+                    <div class="merch-precio">
+                        <span>$9,800 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:73826, nombre:'Set de Maletas Porsche Lifestyle', marca:'Porsche', precio:9800, icono:'🧳'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">SHOW<span>CARS</span></div>
+        <p>© 2025 Showcars. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="marca.js"></script>
+</body>
+</html>

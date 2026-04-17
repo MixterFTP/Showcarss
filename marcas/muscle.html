@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muscle Cars — SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="marca.css">
+    <style>
+        :root {
+            --brand-color: #f5a623;
+            --brand-dark: #b07000;
+            --brand-glow: rgba(245,166,35,0.12);
+        }
+    </style>
+    <script src="../carrito.js"></script>
+</head>
+<body class="brand-page">
+
+        <div class="noise"></div>
+
+    <button id="musica" style="z-index:999;">🔊</button>
+
+    <header>
+        <nav class="menu">
+            <a href="../index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="porsche.html">Porsche</a>
+                <a href="bmw.html">BMW</a>
+                <a href="f1.html">F1</a>
+                <a href="muscle.html" class="active">Muscle</a>
+                <a href="../carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="porsche.html">Porsche</a>
+            <a href="bmw.html">BMW</a>
+            <a href="f1.html">F1</a>
+            <a href="muscle.html">Muscle</a>
+        </div>
+    </header>
+
+    <section class="brand-hero" style="background-image:url('../Fotos/Muscle.jpg');background-size:cover;background-position:center;">
+        <div class="brand-hero-content">
+            <a href="../index.html" class="back-link">← Volver</a>
+            <div class="brand-eyebrow">BORN IN THE USA · 1960s</div>
+            <h1 class="brand-title">MUSCLE<br>CARS</h1>
+            <p class="brand-subtitle">V8 rugiente. Poder americano. Libertad sobre asfalto.</p>
+            <div class="brand-nav-pills">
+                <a href="#historia" class="pill active">Historia</a>
+                <a href="#eventos" class="pill">Eventos</a>
+                <a href="#merch" class="pill">Mercancía</a>
+            </div>
+        </div>
+        <div class="brand-hero-emblem">★</div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia" class="brand-section historia-section">
+        <div class="section-header animar">
+            <span class="section-tag">// HISTORIA</span>
+            <h2>El sueño americano sobre asfalto</h2>
+        </div>
+
+        <div class="historia-grid">
+            <div class="historia-texto animar">
+                <p>Los <strong>muscle cars</strong> nacieron en los Estados Unidos durante la década de 1960, cuando las grandes marcas americanas comenzaron a instalar motores V8 de alta cilindrada en carrocerías de tamaño medio y bajo costo.</p>
+                <p>El <strong>Pontiac GTO de 1964</strong> es considerado el primer muscle car moderno, inaugurando una época de excesos de potencia, neumáticos anchos y rivalidades intensas entre Ford, Chevrolet, Dodge y Pontiac.</p>
+                <p>La <strong>"Muscle Car Era"</strong> duró hasta principios de los 70, cuando la crisis del petróleo y las nuevas normas de emisiones obligaron a los fabricantes a reducir drásticamente la potencia de sus motores.</p>
+                <p>El renacimiento llegó en los 2000s. El <strong>Dodge Challenger, Ford Mustang Shelby GT500 y Chevrolet Camaro ZL1</strong> volvieron con potencias nunca vistas, superando los 700 CV y honrando la tradición de potencia brutal.</p>
+            </div>
+            <div class="historia-hitos animar" style="--delay:0.2s">
+                <div class="hito">
+                    <span class="hito-año">1964</span>
+                    <span class="hito-evento">Pontiac GTO: el primer muscle car. 389 ci V8, 325 CV.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1969</span>
+                    <span class="hito-evento">El año de oro: Mustang Boss 429, Camaro ZL1, Charger 500.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1970</span>
+                    <span class="hito-evento">Dodge Challenger R/T: el ícono definitivo de la era dorada.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">2013</span>
+                    <span class="hito-evento">Shelby GT500: 662 CV. El Mustang más potente de producción.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">2023</span>
+                    <span class="hito-evento">Dodge Challenger SRT Demon 170: 1.025 CV. Récord mundial.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modelos-destacados">
+            <h3 class="animar">Los más legendarios</h3>
+            <div class="modelos-grid">
+                <div class="modelo-card animar" style="--delay:0.1s">
+                    <div class="modelo-numero" style="font-size:28px;">MUSTANG</div>
+                    <div class="modelo-info">
+                        <strong>Shelby GT500</strong>
+                        <span>760 CV · 5.2L Supercharged V8</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.2s">
+                    <div class="modelo-numero" style="font-size:26px;">CHARGER</div>
+                    <div class="modelo-info">
+                        <strong>Hellcat Redeye</strong>
+                        <span>797 CV · 6.2L Supercharged V8</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.3s">
+                    <div class="modelo-numero" style="font-size:24px;">CAMARO</div>
+                    <div class="modelo-info">
+                        <strong>ZL1 1LE</strong>
+                        <span>650 CV · LT4 6.2L · Track Package</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.4s">
+                    <div class="modelo-numero" style="font-size:22px;">CHALLENGER</div>
+                    <div class="modelo-info">
+                        <strong>SRT Demon 170</strong>
+                        <span>1,025 CV · E85 · 0-100 en 1.66s</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos" class="brand-section eventos-section">
+        <div class="section-header animar">
+            <span class="section-tag">// EVENTOS</span>
+            <h2>Próximas experiencias</h2>
+        </div>
+
+        <div class="eventos-grid">
+
+            <div class="evento-card evento-featured animar">
+                <div class="evento-fecha">
+                    <span class="mes">MAY</span>
+                    <span class="dia">10</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">SHOW</span>
+                    <h3>American Muscle Fiesta — CDMX</h3>
+                    <p>El evento de muscle cars más grande de México. Más de 200 autos inscritos de Mustang, Camaro, Challenger, Charger y Corvette. Concurso de sonido, potencia y estética. DJ, food trucks y ambiente americano.</p>
+                    <div class="evento-meta">
+                        <span>📍 Foro Tepeyac, CDMX</span>
+                        <span>👥 Entrada libre</span>
+                        <span>💰 Gratuito</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirEvento({id:84001, nombre:'American Muscle Fiesta — CDMX', marca:'Muscle Cars', precio:0, fecha:'MAY 10', lugar:'Foro Tepeyac, CDMX'})">Registrarse gratis</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.1s">
+                <div class="evento-fecha">
+                    <span class="mes">JUN</span>
+                    <span class="dia">14</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">DRAG</span>
+                    <h3>Showcars Drag Night</h3>
+                    <p>Noche de carreras de cuarto de milla. Compite con tu auto o solo disfruta el espectáculo. Categorías Stock y Modified. Cronometraje oficial.</p>
+                    <div class="evento-meta">
+                        <span>📍 Autódromo, Puebla</span>
+                        <span>👥 100 autos</span>
+                        <span>💰 $800 MXN participante</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:84002, nombre:'Showcars Drag Night', marca:'Muscle Cars', precio:800, icono:'🎫', tipo:'evento', fecha:'JUN 14', lugar:'Autódromo, Puebla'})">Inscribir auto</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.2s">
+                <div class="evento-fecha">
+                    <span class="mes">JUL</span>
+                    <span class="dia">4</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">ESPECIAL</span>
+                    <h3>Muscle Cars 4th of July Meetup</h3>
+                    <p>Celebración del Día de la Independencia americana con estilo. Meet & greet informal, hot dogs, música americana de los 60s y 70s.</p>
+                    <div class="evento-meta">
+                        <span>📍 Monterrey, NL</span>
+                        <span>👥 Abierto</span>
+                        <span>💰 Gratuito</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirEvento({id:84003, nombre:'Muscle Cars 4th of July Meetup', marca:'Muscle Cars', precio:0, fecha:'JUL 4', lugar:'Monterrey, NL'})">Registrarse gratis</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.3s">
+                <div class="evento-fecha">
+                    <span class="mes">SEP</span>
+                    <span class="dia">28</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">CLÁSICOS</span>
+                    <h3>Vintage Muscle Show</h3>
+                    <p>Solo autos de la era dorada: 1964–1975. Concurso de restauración, categorías originales y resto-mod. Jurado de expertos.</p>
+                    <div class="evento-meta">
+                        <span>📍 Guadalajara, JAL</span>
+                        <span>👥 60 autos</span>
+                        <span>💰 $500 MXN entrada</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:84004, nombre:'Vintage Muscle Show', marca:'Muscle Cars', precio:500, icono:'🎫', tipo:'evento', fecha:'SEP 28', lugar:'Guadalajara, JAL'})">Comprar entrada</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MERCANCÍA -->
+    <section id="merch" class="brand-section merch-section">
+        <div class="section-header animar">
+            <span class="section-tag">// MERCANCÍA</span>
+            <h2>Colección Muscle Cars</h2>
+        </div>
+
+        <div class="merch-grid">
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #1a0f00 0%, #3d2500 100%);">
+                    <span class="merch-icon">🏎️</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Dodge Challenger 1970 Diecast 1:18</h4>
+                    <p>Plum Crazy Purple. Metal fundido. Capó abre.</p>
+                    <div class="merch-precio">
+                        <span>$2,800 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:76821, nombre:'Dodge Challenger 1970 Diecast 1:18', marca:'Muscle Cars', precio:2800, icono:'🏎️'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #150c00 0%, #302000 100%);">
+                    <span class="merch-icon">👕</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Playera "Born to Run" Muscle Era</h4>
+                    <p>Algodón heavy 280g. Arte vintage de los 60s.</p>
+                    <div class="merch-precio">
+                        <span>$750 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:76822, nombre:'Playera Born to Run Muscle Era', marca:'Muscle Cars', precio:750, icono:'👕'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #1a1000 0%, #3d2800 100%);">
+                    <span class="merch-icon">🖼️</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Poster Art "Muscle Car Era 1964–1974"</h4>
+                    <p>Ilustración original. 60x90cm. Papel mate premium.</p>
+                    <div class="merch-precio">
+                        <span>$1,400 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:76823, nombre:'Poster Art Muscle Car Era 1964-1974', marca:'Muscle Cars', precio:1400, icono:'🖼️'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #120c00 0%, #2e2200 100%);">
+                    <span class="merch-icon">🧢</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Snapback "Hellcat" Edition</h4>
+                    <p>Bordado 3D. Logo Hellcat en relieve. Unisex.</p>
+                    <div class="merch-precio">
+                        <span>$680 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:76824, nombre:'Snapback Hellcat Edition', marca:'Muscle Cars', precio:680, icono:'🧢'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #181000 0%, #3a2800 100%);">
+                    <span class="merch-icon">📖</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Libro "Muscle Cars: The Definitive Guide"</h4>
+                    <p>800 páginas. 1.500 fotografías. Edición coleccionista.</p>
+                    <div class="merch-precio">
+                        <span>$4,200 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:76825, nombre:'Libro Muscle Cars The Definitive Guide', marca:'Muscle Cars', precio:4200, icono:'📖'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #100a00 0%, #281c00 100%);">
+                    <span class="merch-icon">🔩</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Llavero Mustang Shelby GT500</h4>
+                    <p>Metal macizo. Logo Cobra en esmalte. Peso premium.</p>
+                    <div class="merch-precio">
+                        <span>$450 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:76826, nombre:'Llavero Mustang Shelby GT500', marca:'Muscle Cars', precio:450, icono:'🔩'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">SHOW<span>CARS</span></div>
+        <p>© 2025 Showcars. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="marca.js"></script>
+</body>
+</html>

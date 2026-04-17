@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fórmula 1 — SHOWCARS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="marca.css">
+    <style>
+        :root {
+            --brand-color: #E8001D;
+            --brand-dark: #a0001a;
+            --brand-glow: rgba(232,0,29,0.12);
+        }
+    </style>
+    <script src="../carrito.js"></script>
+</head>
+<body class="brand-page">
+
+        <div class="noise"></div>
+
+    <button id="musica" style="z-index:999;">🔊</button>
+
+    <header>
+        <nav class="menu">
+            <a href="../index.html" class="logo">SHOW<span>CARS</span></a>
+            <div class="links">
+                <a href="porsche.html">Porsche</a>
+                <a href="bmw.html">BMW</a>
+                <a href="f1.html" class="active">F1</a>
+                <a href="muscle.html">Muscle</a>
+                <a href="../carrito.html" class="btn-nav">Carrito <span class="carrito-nav-count"></span></a>
+            </div>
+            <button class="hamburger" id="hamburger">&#9776;</button>
+        </nav>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="porsche.html">Porsche</a>
+            <a href="bmw.html">BMW</a>
+            <a href="f1.html">F1</a>
+            <a href="muscle.html">Muscle</a>
+        </div>
+    </header>
+
+    <section class="brand-hero" style="background-image:url('../Fotos/F1.jpg');background-size:cover;background-position:center;">
+        <div class="brand-hero-content">
+            <a href="../index.html" class="back-link">← Volver</a>
+            <div class="brand-eyebrow">SINCE 1950</div>
+            <h1 class="brand-title">FÓRMULA<br>1</h1>
+            <p class="brand-subtitle">La cima del motorsport. Velocidad. Adrenalina. Leyenda.</p>
+            <div class="brand-nav-pills">
+                <a href="#historia" class="pill active">Historia</a>
+                <a href="#eventos" class="pill">Eventos</a>
+                <a href="#merch" class="pill">Mercancía</a>
+            </div>
+        </div>
+        <div class="brand-hero-emblem">◆</div>
+    </section>
+
+    <!-- HISTORIA -->
+    <section id="historia" class="brand-section historia-section">
+        <div class="section-header animar">
+            <span class="section-tag">// HISTORIA</span>
+            <h2>75 años de velocidad pura</h2>
+        </div>
+
+        <div class="historia-grid">
+            <div class="historia-texto animar">
+                <p>El <strong>Campeonato Mundial de Fórmula 1</strong> celebró su primera temporada en 1950, con el italiano Giuseppe Farina consagrándose como el primer campeón del mundo en un Alfa Romeo 158.</p>
+                <p>Las décadas siguientes fueron una batalla constante entre imperios industriales. <strong>Ferrari, Lotus, McLaren, Williams</strong>: cada equipo escribió capítulos épicos en la historia del deporte.</p>
+                <p>Los años 80 trajeron la era turbo, los 90 la electrónica y los duelos entre <strong>Senna y Prost</strong>, que definieron una rivalidad que va más allá del deporte para convertirse en cultura pop.</p>
+                <p>Hoy, la F1 vive una nueva edad de oro. Con <strong>23 Grandes Premios</strong> en todos los continentes, audiencias de 700 millones de personas y una nueva generación de pilotos carismáticos, el deporte nunca ha sido más popular.</p>
+            </div>
+            <div class="historia-hitos animar" style="--delay:0.2s">
+                <div class="hito">
+                    <span class="hito-año">1950</span>
+                    <span class="hito-evento">Primera temporada de F1. Farina campeón con Alfa Romeo.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1984</span>
+                    <span class="hito-evento">Era turbo: McLaren TAG-Porsche domina con Lauda y Prost.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">1988</span>
+                    <span class="hito-evento">McLaren-Honda gana 15 de 16 carreras. Récord absoluto.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">2010</span>
+                    <span class="hito-evento">Vettel se convierte en el campeón más joven de la historia.</span>
+                </div>
+                <div class="hito">
+                    <span class="hito-año">2021</span>
+                    <span class="hito-evento">Abu Dhabi. Verstappen vs Hamilton. La última vuelta más dramática.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="modelos-destacados">
+            <h3 class="animar">Equipos legendarios</h3>
+            <div class="modelos-grid">
+                <div class="modelo-card animar" style="--delay:0.1s">
+                    <div class="modelo-numero" style="font-size:32px;">FERRARI</div>
+                    <div class="modelo-info">
+                        <strong>Scuderia Ferrari</strong>
+                        <span>16 títulos de constructores</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.2s">
+                    <div class="modelo-numero" style="font-size:28px;">McLAREN</div>
+                    <div class="modelo-info">
+                        <strong>McLaren F1 Team</strong>
+                        <span>8 títulos de constructores</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.3s">
+                    <div class="modelo-numero" style="font-size:26px;">WILLIAMS</div>
+                    <div class="modelo-info">
+                        <strong>Williams Racing</strong>
+                        <span>7 títulos de constructores</span>
+                    </div>
+                </div>
+                <div class="modelo-card animar" style="--delay:0.4s">
+                    <div class="modelo-numero" style="font-size:28px;">RED BULL</div>
+                    <div class="modelo-info">
+                        <strong>Oracle Red Bull Racing</strong>
+                        <span>6 títulos de constructores</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos" class="brand-section eventos-section">
+        <div class="section-header animar">
+            <span class="section-tag">// EVENTOS</span>
+            <h2>Vive la F1 en vivo</h2>
+        </div>
+
+        <div class="eventos-grid">
+
+            <div class="evento-card evento-featured animar">
+                <div class="evento-fecha">
+                    <span class="mes">OCT</span>
+                    <span class="dia">26</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">GRAN PREMIO</span>
+                    <h3>Gran Premio de México — Watch Party Oficial</h3>
+                    <p>Vive el GP de México en el mejor ambiente. Pantallas gigantes, transmisión comentada, zona VIP con vista a la pantalla principal, bar temático y sorteos de mercancía exclusiva de F1.</p>
+                    <div class="evento-meta">
+                        <span>📍 CDMX</span>
+                        <span>👥 500 personas</span>
+                        <span>💰 $750 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:83001, nombre:'GP México — Watch Party Oficial', marca:'Formula 1', precio:750, icono:'🎫', tipo:'evento', fecha:'OCT 26', lugar:'CDMX'})">Comprar entrada</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.1s">
+                <div class="evento-fecha">
+                    <span class="mes">MAR</span>
+                    <span class="dia">15</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">SIMULADOR</span>
+                    <h3>F1 Sim Racing Championship</h3>
+                    <p>Competencia en simuladores profesionales F1 2024. Cockpit vibración, volantes oficiales. Premios para los tres mejores tiempos.</p>
+                    <div class="evento-meta">
+                        <span>📍 Monterrey, NL</span>
+                        <span>👥 64 plazas</span>
+                        <span>💰 $900 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:83002, nombre:'F1 Sim Racing Championship', marca:'Formula 1', precio:900, icono:'🎫', tipo:'evento', fecha:'MAR 15', lugar:'Monterrey, NL'})">Inscribirse</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.2s">
+                <div class="evento-fecha">
+                    <span class="mes">ABR</span>
+                    <span class="dia">19</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">KARTING</span>
+                    <h3>Showcars F1 Karting Race</h3>
+                    <p>Competencia de karting eléctrico en equipos de 4. Librea F1 para cada equipo, sistema de puntos, podio oficial y cena de cierre.</p>
+                    <div class="evento-meta">
+                        <span>📍 CDMX</span>
+                        <span>👥 40 plazas</span>
+                        <span>💰 $1,200 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:83003, nombre:'Showcars F1 Karting Race', marca:'Formula 1', precio:1200, icono:'🎫', tipo:'evento', fecha:'ABR 19', lugar:'CDMX'})">Reservar</button>
+                </div>
+            </div>
+
+            <div class="evento-card animar" style="--delay:0.3s">
+                <div class="evento-fecha">
+                    <span class="mes">SEP</span>
+                    <span class="dia">5</span>
+                </div>
+                <div class="evento-info">
+                    <span class="evento-tag">CHARLA</span>
+                    <h3>Noche F1 con ex-ingeniero Mercedes</h3>
+                    <p>Charla íntima con un ex-ingeniero del equipo Mercedes F1. Estrategias, anécdotas de pista, preguntas del público y cena incluida.</p>
+                    <div class="evento-meta">
+                        <span>📍 Guadalajara, JAL</span>
+                        <span>👥 80 asistentes</span>
+                        <span>💰 $2,500 MXN</span>
+                    </div>
+                    <button class="evento-btn" onclick="añadirAlCarrito({id:83004, nombre:'Noche F1 con ex-ingeniero Mercedes', marca:'Formula 1', precio:2500, icono:'🎫', tipo:'evento', fecha:'SEP 5', lugar:'Guadalajara, JAL'})">Reservar</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- MERCANCÍA -->
+    <section id="merch" class="brand-section merch-section">
+        <div class="section-header animar">
+            <span class="section-tag">// MERCANCÍA</span>
+            <h2>Colección F1 oficial</h2>
+        </div>
+
+        <div class="merch-grid">
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #1a0000 0%, #3d0000 100%);">
+                    <span class="merch-icon">🪖</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Casco réplica Fernando Alonso 2005</h4>
+                    <p>Edición limitada. Talla 1:2. Con peana y certificado.</p>
+                    <div class="merch-precio">
+                        <span>$6,500 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:75821, nombre:'Casco réplica Fernando Alonso 2005', marca:'Formula 1', precio:6500, icono:'🪖'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #100000 0%, #2d0000 100%);">
+                    <span class="merch-icon">👕</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Polo Pitlane F1 Heritage</h4>
+                    <p>Logos de los 10 equipos actuales. Tela transpirable.</p>
+                    <div class="merch-precio">
+                        <span>$1,100 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:75822, nombre:'Polo Pitlane F1 Heritage', marca:'Formula 1', precio:1100, icono:'👕'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #150000 0%, #350000 100%);">
+                    <span class="merch-icon">🏎️</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Modelo Red Bull RB19 1:18</h4>
+                    <p>Temporada 2023. Auto campeón de Verstappen.</p>
+                    <div class="merch-precio">
+                        <span>$3,900 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:75823, nombre:'Modelo Red Bull RB19 1:18', marca:'Formula 1', precio:3900, icono:'🏎️'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.1s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #1a0000 0%, #400000 100%);">
+                    <span class="merch-icon">🖼️</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Print Senna vs Prost — Suzuka '89</h4>
+                    <p>Ilustración premium 50x70cm. Marco incluido.</p>
+                    <div class="merch-precio">
+                        <span>$2,200 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:75824, nombre:'Print Senna vs Prost Suzuka 89', marca:'Formula 1', precio:2200, icono:'🖼️'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.2s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #0d0000 0%, #280000 100%);">
+                    <span class="merch-icon">📖</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Libro "Total Competition" — Ross Brawn</h4>
+                    <p>La biblia de la estrategia en F1 por el legendario director técnico.</p>
+                    <div class="merch-precio">
+                        <span>$980 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:75825, nombre:'Libro Total Competition Ross Brawn', marca:'Formula 1', precio:980, icono:'📖'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="merch-card animar" style="--delay:0.3s">
+                <div class="merch-img" style="background: linear-gradient(135deg, #120000 0%, #300000 100%);">
+                    <span class="merch-icon">🧢</span>
+                </div>
+                <div class="merch-info">
+                    <h4>Colección de Gorras — 10 Equipos</h4>
+                    <p>Set completo de gorras oficiales. Temporada actual.</p>
+                    <div class="merch-precio">
+                        <span>$4,500 MXN</span>
+                        <button class="add-cart" onclick="añadirAlCarrito({id:75826, nombre:'Colección de Gorras 10 Equipos', marca:'Formula 1', precio:4500, icono:'🧢'})">+ Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-logo">SHOW<span>CARS</span></div>
+        <p>© 2025 Showcars. Todos los derechos reservados.</p>
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">Contacto</a>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="marca.js"></script>
+</body>
+</html>
